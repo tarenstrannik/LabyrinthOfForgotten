@@ -17,10 +17,10 @@ MonoBehaviour:
   - Torches
   - Keys
   - PlayerUsable
-  - 
-  - 
-  - 
-  - 
+  - UIInteraction
+  - DirecInteractionOnly
+  - RayInteractionOnbly
+  - TeleportArea
   - 
   - 
   - 

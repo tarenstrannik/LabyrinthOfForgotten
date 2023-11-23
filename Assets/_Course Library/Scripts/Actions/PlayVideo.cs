@@ -56,12 +56,15 @@ public class PlayVideo : MonoBehaviour
     public void NextClip()
     {
         index = ++index % videoClips.Count;
+        videoPlayer.clip = videoClips[index];
         Play();
     }
 
     public void PreviousClip()
     {
+        
         index = --index % videoClips.Count;
+        videoPlayer.clip = videoClips[index];
         Play();
     }
 
@@ -70,6 +73,7 @@ public class PlayVideo : MonoBehaviour
         if (videoClips.Count > 0)
         {
             index = Random.Range(0, videoClips.Count);
+            videoPlayer.clip = videoClips[index];
             Play();
         }
     }
@@ -79,6 +83,7 @@ public class PlayVideo : MonoBehaviour
         if (videoClips.Count > 0)
         {
             index = Mathf.Clamp(value, 0, videoClips.Count);
+            videoPlayer.clip = videoClips[index];
             Play();
         }
     }
@@ -106,7 +111,7 @@ public class PlayVideo : MonoBehaviour
         if (videoPlayer.isPlaying)
             videoPlayer.Pause();
         else
-            videoPlayer.Play();
+            Play();
     }
 
     public void SetPlay(bool value)
@@ -124,5 +129,11 @@ public class PlayVideo : MonoBehaviour
     private void ApplyVideoMaterial(VideoPlayer source)
     {
         meshRenderer.material = videoMaterial;
+    }
+
+    private void OnValidate()
+    {
+        var mat = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        videoMaterial = mat;
     }
 }

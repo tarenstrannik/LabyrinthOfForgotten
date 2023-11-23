@@ -26,6 +26,6 @@ public class LaunchProjectile : MonoBehaviour
     private void ApplyForce(Rigidbody rigidBody)
     {
         Vector3 force = startPoint.forward * launchSpeed;
-        rigidBody.AddForce(force);
+        rigidBody.AddForce(force,ForceMode.Impulse);
     }
 }

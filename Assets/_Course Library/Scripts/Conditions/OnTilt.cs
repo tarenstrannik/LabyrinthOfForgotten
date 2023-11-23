@@ -29,8 +29,9 @@ public class OnTilt : MonoBehaviour
     private void CheckOrientation()
     {
         float similarity = Vector3.Dot(-transform.up, Vector3.up);
+        float a = similarity;
         similarity = Mathf.InverseLerp(-1, 1, similarity);
-
+        Debug.Log(a + " " + similarity);
         bool thresholdCheck = similarity >= threshold;
 
         if (withinThreshold != thresholdCheck)

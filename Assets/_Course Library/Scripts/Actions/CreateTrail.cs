@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 /// <summary>
 /// This script creates a trail at the location of a gameobject with a particular width and color.
@@ -13,6 +14,7 @@ public class CreateTrail : MonoBehaviour
 
     private GameObject currentTrail = null;
 
+    [SerializeField] private Transform CurrentDrawParent;
     public void StartTrail()
     {
         if (!currentTrail)
@@ -34,8 +36,19 @@ public class CreateTrail : MonoBehaviour
     {
         if (currentTrail)
         {
-            currentTrail.transform.parent = null;
-            currentTrail = null;
+            GameObject newTrailObj = new GameObject();
+            newTrailObj.transform.parent = CurrentDrawParent;
+            newTrailObj.AddComponent<MeshRenderer>();
+            newTrailObj.AddComponent<MeshFilter>();
+            var mesh = new Mesh();
+            currentTrail.GetComponent<TrailRenderer>().BakeMesh(mesh);
+            newTrailObj.GetComponent<MeshRenderer>().material = currentTrail.GetComponent<TrailRenderer>().material;
+            newTrailObj.GetComponent<MeshFilter>().mesh = mesh;
+            newTrailObj.tag = currentTrail.tag;
+            //currentTrail.transform.parent = null;
+            //currentTrail.transform.parent = CurrentDrawParent;
+            //currentTrail = null;
+            Destroy(currentTrail);
         }
     }
 
