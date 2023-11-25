@@ -20,54 +20,60 @@ public class PressingPlateScript : MonoBehaviour
     private float m_curTime;
 
     [SerializeField] private float[] m_stageMoveTime = { 3f};
-    private float m_doorFallingTimeout = 1f;
-    private float m_curWaitingTimeout = 0f;
+
     [SerializeField] private GameObject m_LinkedDoor;
     
 
-    [SerializeField] private float[] m_maxMass = {60f };
+    [SerializeField] private float  m_maxMass = 60f;
     private float m_curMass = 0f;
 
     private List<GameObject> m_currentColliders = new List<GameObject>();
+
+    private bool m_doorOpened=false;
+
+    private float m_curPercent=0;
 
     private void Awake()
     {
 
         m_plate.transform.position = m_startTransforms[0].position;
-        m_doorFallingTimeout = m_LinkedDoor.GetComponent<DoorUpScript>().MoveDownTimeSecondStage;
+       
     }
 
 
-
-    public void Moveplate(float startTimePercent, float endTimePercent, float allTime)
+    public void Moveplate(float endTimePercent, float allTime)
     {
-
-            
-            GameObject[] objectsToMove = { m_plate };
-            if (m_MoveplateCoroutine != null)
-            {
-                StopMovingplateCoroutine(m_MoveplateCoroutine);
-            }
-            m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, startTimePercent, endTimePercent, allTime));
-        SendMoveCommandToDoorWithDelay(m_curWaitingTimeout,startTimePercent, endTimePercent, allTime);
-           
+        
+        StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
+        StartCoroutine(SendMoveCommandToDoorWithDelay(endTimePercent, allTime));
     }
 
-    private IEnumerator SendMoveCommandToDoorWithDelay(float delay, float startTimePercent, float endTimePercent, float allTime)
+    private IEnumerator SendMoveCommandToDoorWithDelay(float endTimePercent, float allTime)
     {
-        yield return new WaitForSeconds(delay);
-        m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoor(startTimePercent, endTimePercent, allTime);
-    }
-
-    private IEnumerator DecreasingDelay()
-    {
-        m_curWaitingTimeout = m_doorFallingTimeout;
-        while (m_curWaitingTimeout>=0)
-        {
-            m_curWaitingTimeout -= Time.deltaTime;
+        while (m_LinkedDoor.GetComponent<DoorUpScript>().m_IsFalling)
+        { 
             yield return null;
         }
+        
+        m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoor(endTimePercent, allTime);
     }
+
+    private IEnumerator MovePlateWithDelay(float endTimePercent, float allTime)
+    {
+
+        while (m_LinkedDoor.GetComponent<DoorUpScript>().m_IsFalling)
+        {
+            yield return null;
+        }
+        GameObject[] objectsToMove = { m_plate };
+
+        if (m_MoveplateCoroutine != null)
+        {
+            StopMovingplateCoroutine(m_MoveplateCoroutine);
+        }
+        m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, endTimePercent, allTime));
+    }
+
     private void StopMovingplateCoroutine(Coroutine cor)
     {
         if (cor != null)
@@ -77,7 +83,7 @@ public class PressingPlateScript : MonoBehaviour
             m_LinkedDoor.GetComponent<DoorUpScript>().StopMovingDoorCoroutine();
         }
     }
-    private IEnumerator IMoveplate(GameObject[] objectsToMove, float startTimePercent, float endTimePercent, float allTime)
+    private IEnumerator IMoveplate(GameObject[] objectsToMove, float endTimePercent, float allTime)
     {
 
 
@@ -85,9 +91,9 @@ public class PressingPlateScript : MonoBehaviour
         Vector3 endPosition = m_endTransforms[0].position;
 
 
-        int directionCoef = endTimePercent > startTimePercent ? 1 : -1;
+        int directionCoef = endTimePercent > m_curPercent ? 1 : -1;
 
-        m_curTime = startTimePercent * allTime;
+        m_curTime = m_curPercent * allTime;
 
         m_plateAudioSource.Play();
 
@@ -99,46 +105,74 @@ public class PressingPlateScript : MonoBehaviour
                 obj.transform.position = Vector3.Lerp(startPosition, endPosition, m_curTime / allTime);
             }
             m_curTime += directionCoef * Time.deltaTime;
-
+            m_curPercent = m_curTime / allTime;
             yield return null;
         }
+        m_curPercent = m_curTime / allTime;
         m_plateAudioSource.Pause();
-        if (m_curTime / allTime >= 1)
+        if (m_curPercent >= 1 || m_curPercent <= 0)
         {
             m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
         }
 
+        if(m_curPercent >= 1)
+        {
+            m_doorOpened = true;
+            
+        }
         m_MoveplateCoroutine = null;
+    }
 
-        if ( m_curTime / allTime >= 1)
+
+     private void OnCollisionEnter(Collision collision)
+     {
+         if (!m_doorOpened)
+         {
+             var colRb = collision.gameObject.GetComponent<Rigidbody>();
+             if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
+             {
+                 m_currentColliders.Add(collision.gameObject);
+                
+                 m_curMass += colRb.mass;
+
+                 Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+
+
+             }
+         }
+     }
+    /*
+     private void OnCollisionExit(Collision collision)
+     {
+         if(m_curMass< m_maxMass && m_doorOpened)
+         {
+             m_doorOpened = false;
+             m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
+             m_curWaitingTimeout = m_doorFallingTimeout;
+             m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
+         }
+         m_currentColliders.Remove(collision.gameObject);
+         var prevMass = m_curMass;
+         m_curMass -= collision.gameObject.GetComponent<Rigidbody>().mass;
+         Moveplate(prevMass / m_maxMass, m_curMass / m_maxMass, m_stageMoveTime[0]);
+     }
+    */
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        m_currentColliders.Remove(other.gameObject);
+        
+        m_curMass -= other.gameObject.GetComponent<Rigidbody>().mass;
+        if (m_curMass < m_maxMass && m_doorOpened)
         {
+            m_doorOpened = false;
+            m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
            
-            
+            m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
         }
-    }
+        
 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-
-        var colRb = collision.gameObject.GetComponent<Rigidbody>();
-        if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
-        {
-            m_currentColliders.Add(collision.gameObject);
-            var prevMass = m_curMass;
-            m_curMass += colRb.mass;
-
-            Moveplate(prevMass / m_maxMass[0], m_curMass / m_maxMass[0], m_stageMoveTime[0]);
-            
-
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        m_currentColliders.Remove(collision.gameObject);
-        var prevMass = m_curMass;
-        m_curMass -= collision.gameObject.GetComponent<Rigidbody>().mass;
-        Moveplate(prevMass / m_maxMass[0], m_curMass / m_maxMass[0], m_stageMoveTime[0]);
+        Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
     }
 }
