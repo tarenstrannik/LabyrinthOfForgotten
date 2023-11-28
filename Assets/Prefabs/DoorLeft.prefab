@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1687447647295361273}
   - component: {fileID: 5618974422864821474}
   - component: {fileID: 4854087943683679182}
+  - component: {fileID: 7931664547148676262}
   m_Layer: 0
   m_Name: DoorLeft
   m_TagString: Untagged
@@ -146,7 +147,7 @@ HingeJoint:
   m_Anchor: {x: -0.5, y: 0.5, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -4.868999, y: 4.6759996, z: 27.732}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -173,3 +174,16 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7931664547148676262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018907059219518924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae567af53335746aa625db011f1b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectMaterial: 0

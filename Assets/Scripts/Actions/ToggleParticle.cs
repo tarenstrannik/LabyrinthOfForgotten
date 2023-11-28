@@ -9,9 +9,11 @@ public class ToggleParticle : MonoBehaviour
     private ParticleSystem currentParticleSystem = null;
     private MonoBehaviour currentOwner = null;
 
+    private AudioSource m_audioSource;
     private void Awake()
     {
         currentParticleSystem = GetComponent<ParticleSystem>();
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     public void Play()
@@ -30,6 +32,7 @@ public class ToggleParticle : MonoBehaviour
         {
             currentOwner = this;
             Play();
+            if (m_audioSource != null) m_audioSource.Play();
         }
     }
 
@@ -39,6 +42,7 @@ public class ToggleParticle : MonoBehaviour
         {
             currentOwner = null;
             Stop();
+            if (m_audioSource != null) m_audioSource.Pause();
         }
     }
 

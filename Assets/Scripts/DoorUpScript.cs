@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
+
 using UnityEngine;
 
 public class DoorUpScript : MonoBehaviour
@@ -28,7 +28,7 @@ public class DoorUpScript : MonoBehaviour
     }
 
     private Coroutine m_MoveDoorCoroutine = null;
-    private Coroutine m_MoveDoorSecondStageCoroutine = null;
+
     private float m_curTime=0;
     private float m_curPercent=0;
 

@@ -239,6 +239,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5968261006037918990}
+  - component: {fileID: 1442097137113796283}
+  - component: {fileID: 9104102668641405678}
   m_Layer: 0
   m_Name: KeyHole
   m_TagString: Untagged
@@ -264,3 +266,37 @@ Transform:
   - {fileID: 605500339341059843}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1442097137113796283
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365834276951701871}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.17
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9104102668641405678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365834276951701871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae567af53335746aa625db011f1b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectMaterial: 3

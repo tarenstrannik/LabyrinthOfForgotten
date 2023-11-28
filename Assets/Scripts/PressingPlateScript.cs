@@ -22,11 +22,12 @@ public class PressingPlateScript : MonoBehaviour
     [SerializeField] private float[] m_stageMoveTime = { 3f};
 
     [SerializeField] private GameObject m_LinkedDoor;
-    
+    [SerializeField] private List<Collider> m_Collider;
 
     [SerializeField] private float  m_maxMass = 60f;
     private float m_curMass = 0f;
 
+    [Tooltip("The list of colliders to use for detecting weight. If not selected any, using all colliders of object and it's children")]
     private List<GameObject> m_currentColliders = new List<GameObject>();
 
     private bool m_doorOpened=false;
@@ -124,22 +125,27 @@ public class PressingPlateScript : MonoBehaviour
     }
 
 
-     private void OnCollisionEnter(Collision collision)
-     {
-         if (!m_doorOpened)
-         {
-             var colRb = collision.gameObject.GetComponent<Rigidbody>();
-             if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
-             {
-                 m_currentColliders.Add(collision.gameObject);
-                
-                 m_curMass += colRb.mass;
+    private void OnCollisionEnter(Collision collision)
+    {
 
-                 Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+        if (m_Collider.Contains(collision.GetContact(0).thisCollider) || m_Collider.Count==0)
+        {
+            
+            if (!m_doorOpened)
+            {
+                var colRb = collision.gameObject.GetComponent<Rigidbody>();
+                if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
+                {
+                    m_currentColliders.Add(collision.gameObject);
+
+                    m_curMass += colRb.mass;
+
+                    Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
 
 
-             }
-         }
+                }
+            }
+        }
      }
     /*
      private void OnCollisionExit(Collision collision)
