@@ -5720,13 +5720,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
       propertyPath: ShapeModule.type
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
+      propertyPath: LightsModule.light
+      value: 
+      objectReference: {fileID: 304490238179207194}
+    - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
       propertyPath: LightsModule.ratio
       value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
+      propertyPath: LightsModule.enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -5781,7 +5801,7 @@ PrefabInstance:
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: LightsModule.rangeCurve.scalar
-      value: 30
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -5796,12 +5816,12 @@ PrefabInstance:
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: InitialModule.startSize.minScalar
-      value: 0.01
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: LightsModule.rangeCurve.minScalar
-      value: 25
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -5826,12 +5846,12 @@ PrefabInstance:
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: LightsModule.intensityCurve.scalar
-      value: 5
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: LightsModule.rangeCurve.minMaxState
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -5856,7 +5876,7 @@ PrefabInstance:
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: LightsModule.intensityCurve.minScalar
-      value: 2
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -5890,6 +5910,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 10d61990b8fa700468c2aab512ffff1e, type: 2}
     - target: {fileID: 6454688595180157832, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
+      propertyPath: m_SoftShadowQuality
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454688595180157832, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
+      propertyPath: m_UsePipelineSettings
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454688595180157832, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
       value: 2
       objectReference: {fileID: 0}
@@ -5906,17 +5936,22 @@ PrefabInstance:
     - target: {fileID: 8367552835706666596, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: m_Range
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8367552835706666596, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: m_Intensity
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8367552835706666596, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: m_Shadows.m_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367552835706666596, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8367552835706666596, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
