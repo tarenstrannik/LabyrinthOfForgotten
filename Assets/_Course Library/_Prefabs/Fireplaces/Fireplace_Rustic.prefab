@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acae567af53335746aa625db011f1b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_objectMaterial: 1
+  m_objectMaterial: 2
 --- !u!1 &4886255101914483161
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,6 +200,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Fire: {fileID: 5497464287713181362}
+  m_Smoke: {fileID: 0}
+  m_fireAudio: {fileID: 0}
+  m_fireOneShotAudio: {fileID: 0}
+  m_fireFadingAudio: {fileID: 0}
 --- !u!65 &9104050677939796913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -458,6 +462,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5932572902414383938, guid: 3b83970ba45e64fc9a7749d8db540114,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 10d61990b8fa700468c2aab512ffff1e, type: 2}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
       propertyPath: playOnAwake
@@ -466,7 +475,7 @@ PrefabInstance:
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
       propertyPath: LightsModule.color
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
@@ -492,6 +501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LightsModule.enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
+        type: 3}
+      propertyPath: LightsModule.maxLights
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
@@ -521,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
       propertyPath: LightsModule.rangeCurve.scalar
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
@@ -546,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
       propertyPath: LightsModule.intensityCurve.scalar
-      value: 0.3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
@@ -567,6 +581,21 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.4738066
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.04150939
+      objectReference: {fileID: 0}
+    - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.7743147
       objectReference: {fileID: 0}
     - target: {fileID: 5932572902414383939, guid: 3b83970ba45e64fc9a7749d8db540114,
         type: 3}
@@ -688,7 +717,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: FireFlame
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8494370937112116267, guid: 3b83970ba45e64fc9a7749d8db540114, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

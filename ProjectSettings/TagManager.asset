@@ -28,7 +28,7 @@ TagManager:
   - DynamicStaticObjects
   - DynamicObjectsNoBodyInteraction
   - DynamicObjectsNoBackpackInteraction
-  - 
+  - DynamicObjectBackpackInSocket
   - 
   - 
   - 
