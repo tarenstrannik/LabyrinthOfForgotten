@@ -6,6 +6,10 @@ TagManager:
   tags:
   - FireFlame
   - UIInteractable
+  - Water
+  - StaticInteractable
+  - Torch
+  - Backpack
   layers:
   - Default
   - TransparentFX
@@ -13,17 +17,17 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - MainDoor
+  - NoPeaking
+  - LeftHand
+  - RightHand
+  - PlayerBody
+  - PlayerTeleportHand
+  - DynamicObjects
+  - Stairs
+  - DynamicStaticObjects
+  - DynamicObjectsNoBodyInteraction
+  - DynamicObjectsNoBackpackInteraction
   - 
   - 
   - 

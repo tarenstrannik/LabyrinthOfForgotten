@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362292641536000116}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KeyPostament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 1793265004714211957}
   - component: {fileID: 4567194896494660521}
   - component: {fileID: 2872543403180487803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KeyPostament
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,7 +2152,7 @@ GameObject:
   - component: {fileID: 8470245172987074663}
   - component: {fileID: 3944255291442441934}
   - component: {fileID: 3372117466857913937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,7 +2266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4726218335768354440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -127,7 +127,7 @@ public class PressingPlateScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
+        
         if (m_Collider.Contains(collision.GetContact(0).thisCollider) || m_Collider.Count==0)
         {
             
@@ -167,18 +167,25 @@ public class PressingPlateScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        m_currentColliders.Remove(other.gameObject);
-        
-        m_curMass -= other.gameObject.GetComponent<Rigidbody>().mass;
-        if (m_curMass < m_maxMass && m_doorOpened)
+       
+        if (m_currentColliders.Contains(other.gameObject))
         {
-            m_doorOpened = false;
-            m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
-           
-            m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
-        }
-        
+            m_currentColliders.Remove(other.gameObject);
+            if (other.gameObject.GetComponent<Rigidbody>() != null)
+            {
+                m_curMass -= other.gameObject.GetComponent<Rigidbody>().mass;
+            }
+            
+            if (m_curMass < m_maxMass && m_doorOpened)
+            {
+                m_doorOpened = false;
+                m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
 
-        Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+                m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
+            }
+
+
+            Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+        }
     }
 }

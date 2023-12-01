@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3129032921440615003}
   - component: {fileID: 7438767592181003869}
   - component: {fileID: 3852695007576333285}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 6966716208981486461}
   - component: {fileID: 7891936083652924463}
   - component: {fileID: 2873411770158143800}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,3 +446,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 0}
   m_MaxSoundVelocity: 3
+  m_repeatCollisionDelay: 0.5

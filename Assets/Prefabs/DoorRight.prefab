@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_Axis.y
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 6932694249808442500, guid: 9a2ca213b62bb994b8bc38ad26aa0620,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.72
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

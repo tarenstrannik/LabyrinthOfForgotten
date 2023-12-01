@@ -21,7 +21,7 @@ public class DoorUnlocking : MonoBehaviour
         
         m_doorAnimator.SetFloat("f_OpeningTime", 1 / openTime);
         m_doorAnimator.SetBool("b_IsClosed", true);
-        Debug.Log(m_isLeft);
+       
         m_doorAnimator.SetBool("b_isLeft", m_isLeft);
     }
     public void UnlockDoor()
@@ -30,7 +30,7 @@ public class DoorUnlocking : MonoBehaviour
         if (m_isLocked)
         {
             m_isLocked = false;
-           
+            m_doorAnimator.enabled = true;
             m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationY;
 
             m_doorAnimator.SetTrigger("t_OpenDoor");

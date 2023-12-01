@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5169356761685520168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6192089663974457264}
   - component: {fileID: 2189497505261915386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Init Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 6932694249808442500}
   - component: {fileID: 8336854351954646938}
   - component: {fileID: 898468945844858522}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,11 +187,9 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.465, y: 0, z: 0}
-  m_LocalScale: {x: 2.93, y: 4.6, z: 0.2325397}
+  m_LocalScale: {x: 2.97, y: 4.723, z: 0.2325397}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1450406075066706206}
-  - {fileID: 2782049538381641259}
+  m_Children: []
   m_Father: {fileID: 714977698150362822}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8336854351954646938
@@ -257,7 +255,7 @@ GameObject:
   - component: {fileID: 2340315892769094808}
   - component: {fileID: 4094935630684207682}
   - component: {fileID: 5169836399412875590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -512,7 +510,7 @@ GameObject:
   - component: {fileID: 2618798558734220319}
   - component: {fileID: 8984891732657628567}
   - component: {fileID: 3723496161109803170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,6 +530,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1450406075066706206}
+  - {fileID: 2782049538381641259}
   - {fileID: 6932694249808442500}
   - {fileID: 6192089663974457264}
   - {fileID: 7372187103270626545}
@@ -552,13 +552,13 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.93, y: 4.6, z: 0.2325397}
+  m_Size: {x: 2.97, y: 4.723, z: 0.2325397}
   m_Center: {x: 1.465, y: 0, z: 0}
 --- !u!54 &5618974422864821474
 Rigidbody:
@@ -767,7 +767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3593543483235629585}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 1450406075066706206}
   - component: {fileID: 7456142217169389981}
   - component: {fileID: 763993302359245832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,11 +816,11 @@ Transform:
   m_GameObject: {fileID: 4484381632208693202}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.44880545, y: -0.23065217, z: -0.7138582}
-  m_LocalScale: {x: 0.034129694, y: 0.02173913, z: 0.43003413}
+  m_LocalPosition: {x: 2.78, y: -1.061, z: -0.16600037}
+  m_LocalScale: {x: 0.1010239, y: 0.10239131, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6932694249808442500}
+  m_Father: {fileID: 714977698150362822}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7456142217169389981
 MeshFilter:
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 2091283666786239068}
   - component: {fileID: 6668451858839556102}
   - component: {fileID: 5116911038055026148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 2782049538381641259}
   - component: {fileID: 6405327579564490886}
   - component: {fileID: 5840350385121776671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HandleVisual (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,11 +1150,11 @@ Transform:
   m_GameObject: {fileID: 6239627262688842004}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.44880545, y: -0.23065217, z: 0.705254}
-  m_LocalScale: {x: 0.034129694, y: 0.02173913, z: 0.43003413}
+  m_LocalPosition: {x: 2.78, y: -1.061, z: 0.16399956}
+  m_LocalScale: {x: 0.1010239, y: 0.10239131, z: 0.10000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6932694249808442500}
+  m_Father: {fileID: 714977698150362822}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &6405327579564490886
 MeshFilter:
@@ -1216,7 +1216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7372187103270626545}
   - component: {fileID: 6772012025384381487}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cont Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}

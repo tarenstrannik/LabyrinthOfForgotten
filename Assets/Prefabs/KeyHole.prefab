@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6939365664699437468}
   - component: {fileID: 1362710499849972449}
   - component: {fileID: 5162172058813132410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8713979089872197655}
   - component: {fileID: 9096194854207472355}
   - component: {fileID: 4065317980934346296}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 605500339341059843}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5968261006037918990}
   - component: {fileID: 1442097137113796283}
   - component: {fileID: 9104102668641405678}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: KeyHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}

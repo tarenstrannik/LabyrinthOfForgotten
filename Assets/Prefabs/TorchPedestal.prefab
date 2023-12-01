@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8125066749219472882}
   - component: {fileID: 1374469244096521228}
   - component: {fileID: 1321219063209494440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TorchPedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 8408175434113967212}
   - component: {fileID: 757287752056840785}
   - component: {fileID: 8357362656060629892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Socket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4079480524520304407}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,13 +210,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6619502153861059426}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0.366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8125066749219472882}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!1 &9149479369967389410
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 2253937615334127044}
   - component: {fileID: 1041994875804438311}
   - component: {fileID: 4449355930072941635}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TorchPedestalVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
