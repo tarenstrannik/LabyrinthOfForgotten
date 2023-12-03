@@ -110,6 +110,8 @@ public class PressingPlateScript : MonoBehaviour
             yield return null;
         }
         m_curPercent = m_curTime / allTime;
+        m_curPercent = m_curPercent > 1 ? 1 : m_curPercent;
+        m_curPercent = m_curPercent < 0 ? 0 : m_curPercent;
         m_plateAudioSource.Pause();
         if (m_curPercent >= 1 || m_curPercent <= 0)
         {
@@ -183,7 +185,7 @@ public class PressingPlateScript : MonoBehaviour
 
                 m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
             }
-
+            
 
             Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
         }
