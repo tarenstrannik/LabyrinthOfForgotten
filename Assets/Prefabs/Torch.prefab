@@ -392,8 +392,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.7, z: 0.1}
-  m_Center: {x: 0, y: 0.05, z: 0}
+  m_Size: {x: 0.1, y: 0.29902184, z: 0.1}
+  m_Center: {x: 0, y: 0.25048906, z: 0}
 --- !u!114 &1283529553887993241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -698,6 +698,8 @@ GameObject:
   - component: {fileID: 3930688293294733704}
   - component: {fileID: 8806179823696352099}
   - component: {fileID: 2998700049097616204}
+  - component: {fileID: 2618513447422148721}
+  - component: {fileID: 686311703654284922}
   m_Layer: 12
   m_Name: TorchHandle
   m_TagString: Untagged
@@ -770,6 +772,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2618513447422148721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061637689989316366}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.6753631, z: 1}
+  m_Center: {x: 0, y: -0.16231835, z: 0}
+--- !u!114 &686311703654284922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061637689989316366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62276f2201a1cd14fb1ee0da18c7c69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioSource: {fileID: 5449597346638450218}
+  m_MaxSoundVelocity: 3
+  m_repeatCollisionDelay: 0.5
 --- !u!1 &8395532869144501246
 GameObject:
   m_ObjectHideFlags: 0
