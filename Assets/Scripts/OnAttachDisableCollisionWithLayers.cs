@@ -4,26 +4,39 @@ using Unity.XR.CoreUtils;
 
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using static UnityEngine.Rendering.GPUSort;
 
 public class OnAttachDisableCollisionWithLayers : MonoBehaviour
 {
     [SerializeField] private int m_collisionLayerToExcludeBody;
+    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorch;
 
-    private int m_curCollisionLayer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private int m_defaultCollisionLayer;
+    [SerializeField] private int m_defaultFireCollisionLayer;
 
     public void Attach(SelectEnterEventArgs args)
     {
-        m_curCollisionLayer = args.interactableObject.transform.gameObject.layer;
-        args.interactableObject.transform.gameObject.SetLayerRecursively(m_collisionLayerToExcludeBody);
+        if(args.interactableObject.transform.gameObject.GetComponent<IgniteFire>()!=null && !args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().IsFireStopped)
+        {
+            args.interactableObject.transform.gameObject.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorch);
+        }
+        else
+        {
+            args.interactableObject.transform.gameObject.SetLayerRecursively(m_collisionLayerToExcludeBody);
+        }
+        
     }
 
     public void Detach(SelectExitEventArgs args)
     {
-        args.interactableObject.transform.gameObject.SetLayerRecursively(m_curCollisionLayer);
+        if (args.interactableObject.transform.gameObject.GetComponent<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().IsFireStopped)
+        {
+            args.interactableObject.transform.gameObject.SetLayerRecursively(m_defaultFireCollisionLayer);
+        }
+        else
+        {
+            args.interactableObject.transform.gameObject.SetLayerRecursively(m_defaultCollisionLayer);
+        }
+        
     }
 }

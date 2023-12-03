@@ -25,13 +25,13 @@ TagManager:
   - PlayerTeleportHand
   - DynamicObjects
   - Stairs
-  - DynamicStaticObjects
-  - DynamicObjectsNoBodyInteraction
-  - DynamicObjectsNoBackpackInteraction
+  - 
+  - DynamicObjectsInHand(NoBodyInteraction)
+  - DynamicObjectsInBackpack(NoBackpackInteraction)
   - DynamicObjectBackpackInSocket
-  - 
-  - 
-  - 
+  - NoShadow
+  - NoShadowInHand
+  - NoShadowInBackpack
   - 
   - 
   - 
