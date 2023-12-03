@@ -101,7 +101,7 @@ public class IgniteFire : MonoBehaviour
         m_fireLight.enabled = true;
         m_lightVariation.StartLightVariation();
         if (GetComponent<SaveLinkOnControllerSelectedObject>().Controller != null)
-            GetComponent<SaveLinkOnControllerSelectedObject>().Controller.SendMessage("AddPlayerTorchAndEnableWaterCollider", gameObject, SendMessageOptions.DontRequireReceiver);
+            GetComponent<SaveLinkOnControllerSelectedObject>().Controller.SendMessage("AddPlayerFiringTorchAndEnableWaterCollider", gameObject, SendMessageOptions.DontRequireReceiver);
         ChangeLayer();
 
     }

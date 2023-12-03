@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Unity.VisualScripting.StickyNote;
+
 
 public class LightVariation : MonoBehaviour
 {
@@ -31,6 +31,7 @@ public class LightVariation : MonoBehaviour
     private void Awake()
     {
         m_light = GetComponent<Light>();
+        m_visibilityRenderer.transform.localScale = new Vector3(m_maxDistance, m_maxDistance, m_maxDistance);
     }
 
     private void OnEnable()

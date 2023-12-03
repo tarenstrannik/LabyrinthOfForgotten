@@ -8,10 +8,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2273297249113828763, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273297249113828763, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659414315847222594, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659414315847222594, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161191570414085625, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3161191570414085625, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290917273410392196, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3290917273410392196, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3753307533193698234, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_Name
       value: Reshetka Door Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032831670946105601, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032831670946105601, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959569383389936626, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959569383389936626, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5601981076085204594, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
@@ -66,6 +126,36 @@ PrefabInstance:
     - target: {fileID: 5601981076085204594, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101547264461868244, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101547264461868244, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636547085194270731, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8636547085194270731, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065456932098231736, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065456932098231736, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

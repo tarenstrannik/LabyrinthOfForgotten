@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,6 +31,7 @@ public class ShowMessageFromList : MonoBehaviour
 
         if (newIndex < index)
         {
+            index = newIndex;
             OnComplete.Invoke();
         }
         else
@@ -44,7 +46,7 @@ public class ShowMessageFromList : MonoBehaviour
         ShowMessage();
     }
 
-    private void ShowMessage()
+    public void ShowMessage()
     {
         messageOutput.text = messages[Mathf.Abs(index)];
     }

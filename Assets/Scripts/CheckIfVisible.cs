@@ -7,6 +7,7 @@ public class CheckIfVisible : MonoBehaviour
 
     [SerializeField] private IgniteFire m_igniteFire;
     private Light m_fireLight;
+    [SerializeField] private int m_invisibleRendererLayer = 22;
     private void Awake()
     {
         m_fireLight = m_igniteFire.FireLight;
@@ -29,7 +30,7 @@ public class CheckIfVisible : MonoBehaviour
     
     private void OnBecameVisible()
     {
-        
+
         if (!m_igniteFire.IsFireStopped) m_fireLight.enabled = true;
 
     }
@@ -37,7 +38,11 @@ public class CheckIfVisible : MonoBehaviour
     private void OnBecameInvisible()
     {
 
-            m_fireLight.enabled = false;
+        m_fireLight.enabled = false;
 
+    }
+    private void Update()
+    {
+        gameObject.layer = m_invisibleRendererLayer;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7505584170898707013}
   - component: {fileID: 5496116148791137875}
   - component: {fileID: 2736814991720039484}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: HandleVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 3
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -92,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179660861103845327}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2028090516369151397}
   - component: {fileID: 7454631035111594935}
   - component: {fileID: 5580569713343320544}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: HandleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 3037717198864795562}
   - component: {fileID: 2376611433939215913}
   - component: {fileID: 741611841382115838}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: HandleSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 1905664762557173991}
   - component: {fileID: 2955194132494396528}
   - component: {fileID: 4416605210200177468}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: HandlePedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 3
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5706192704238853110}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 8807988080785740798}
   - component: {fileID: 685121887607397186}
   - component: {fileID: 7740213294880832447}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: Handle
   m_TagString: StaticInteractable
   m_Icon: {fileID: 0}
