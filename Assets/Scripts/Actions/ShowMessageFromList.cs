@@ -27,7 +27,7 @@ public class ShowMessageFromList : MonoBehaviour
 
     public void NextMessage()
     {
-        int newIndex = ++index % messages.Count;
+        int newIndex = index+1 < messages.Count ? index+1 : 0;
 
         if (newIndex < index)
         {
@@ -36,13 +36,14 @@ public class ShowMessageFromList : MonoBehaviour
         }
         else
         {
+            index = newIndex;
             ShowMessage();
         }
     }
 
     public void PreviousMessage()
     {
-        index = --index % messages.Count;
+        index = index-1 >=0 ? index-1 : messages.Count-1;
         ShowMessage();
     }
 

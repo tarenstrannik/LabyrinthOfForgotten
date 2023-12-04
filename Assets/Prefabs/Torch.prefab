@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb756a4b82b24040a468c0a73063e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginThreshold: 2
+  beginThreshold: 1.25
   endThreshold: 0.25
   OnBegin:
     m_PersistentCalls:

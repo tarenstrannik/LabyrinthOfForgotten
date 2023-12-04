@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
 {
-    [SerializeField] private Collider m_WaterCollider;
+    [SerializeField] private GameObject m_WaterCollider;
     [SerializeField] private string m_torchTag;
 
     [SerializeField] private GameObject m_player;
@@ -28,7 +28,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
                 m_playerSockets.m_playerFiringTorches.Add(args.interactableObject.transform.gameObject);
             }
         }
-        m_WaterCollider.enabled = m_playerSockets.m_playerFiringTorches.Count > 0;
+        m_WaterCollider.SetActive(m_playerSockets.m_playerFiringTorches.Count > 0);
     }
     private void AddPlayerFiringTorchAndEnableWaterCollider(GameObject obj)
     {
@@ -37,7 +37,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
         {
             m_playerSockets.m_playerFiringTorches.Add(obj);
         }
-        m_WaterCollider.enabled = m_playerSockets.m_playerFiringTorches.Count > 0;
+        m_WaterCollider.SetActive(m_playerSockets.m_playerFiringTorches.Count > 0);
 
     }
     private void RemovePlayerFiringTorchAndDisableWaterCollider(GameObject obj)
@@ -47,7 +47,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
         {
             m_playerSockets.m_playerFiringTorches.Remove(obj);
         }
-        m_WaterCollider.enabled = m_playerSockets.m_playerFiringTorches.Count > 0;
+        m_WaterCollider.SetActive(m_playerSockets.m_playerFiringTorches.Count > 0);
 
     }
     public void DisableColliderOnTorchDeSelect(SelectExitEventArgs args)
@@ -61,7 +61,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
             }
         }
 
-        m_WaterCollider.enabled = m_playerSockets.m_playerFiringTorches.Count > 0;
+        m_WaterCollider.SetActive(m_playerSockets.m_playerFiringTorches.Count > 0);
 
     }
 

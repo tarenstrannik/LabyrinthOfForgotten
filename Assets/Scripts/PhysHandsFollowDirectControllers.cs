@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhysHandsFollowDirectControllers : MonoBehaviour
 {
-    [SerializeField] private Transform m_controllerToFollow;
+    [SerializeField] protected Transform m_controllerToFollow;
     public Transform ControllerToFollow
     {
         get
@@ -16,15 +16,15 @@ public class PhysHandsFollowDirectControllers : MonoBehaviour
             m_controllerToFollow = value;
         }
     }
-    private Rigidbody m_handRb;
+    protected Rigidbody m_handRb;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         m_handRb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         m_handRb.velocity= (m_controllerToFollow.position-transform.position)/ Time.fixedDeltaTime;
         //Debug.Log(m_controllerToFollow.position+" "+ transform.position+" "+m_handRb.velocity);

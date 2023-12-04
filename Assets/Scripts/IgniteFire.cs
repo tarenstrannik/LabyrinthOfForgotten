@@ -57,7 +57,7 @@ public class IgniteFire : MonoBehaviour
     {
         m_isFireStopped = m_Fire.isStopped;
         m_lightVariation = m_fireLight.GetComponent<LightVariation>();
-        if (transform.parent.gameObject.CompareTag(m_torchTag))
+        if (transform.parent && transform.parent.gameObject.CompareTag(m_torchTag))
         {
             m_torch = transform.parent.gameObject;
         }
@@ -112,6 +112,7 @@ public class IgniteFire : MonoBehaviour
     {
         m_isFireStopped = false;
         m_Fire.Play();
+        m_fireAudio.Play();
         m_FireRug.material = m_firing;
         m_fireLight.enabled = true;
         m_lightVariation.StartLightVariation();

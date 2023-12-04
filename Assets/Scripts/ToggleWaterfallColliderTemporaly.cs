@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToggleWaterfallColliderTemporaly : MonoBehaviour
 {
-    [SerializeField] Collider m_waterCollider;
+    [SerializeField] GameObject m_waterCollider;
     private bool m_isFromWater = false;
     public bool IsFromWater
     {
@@ -33,7 +33,7 @@ public class ToggleWaterfallColliderTemporaly : MonoBehaviour
     private Coroutine m_turnOffWaterColliderCoroutine;
     public void TurnOffWaterCollider()
     {
-        if (m_waterCollider.enabled)
+        if (m_waterCollider.activeSelf)
         {
             if (m_isFromWater)
             {
@@ -48,7 +48,7 @@ public class ToggleWaterfallColliderTemporaly : MonoBehaviour
     }
     private IEnumerator ITurnOffWaterCollider()
     {
-        m_waterCollider.enabled = false;
+        m_waterCollider.SetActive(false);
   
         while (!m_isHandHere )
         {
@@ -57,7 +57,7 @@ public class ToggleWaterfallColliderTemporaly : MonoBehaviour
         }
 
 
-        m_waterCollider.enabled = true;
+        m_waterCollider.SetActive(true);
         m_turnOffWaterColliderCoroutine = null;
     }
 }

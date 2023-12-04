@@ -16,7 +16,7 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
 
     public void Attach(SelectEnterEventArgs args)
     {
-        if(args.interactableObject.transform.gameObject.GetComponent<IgniteFire>()!=null && !args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().IsFireStopped)
+        if(args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>()!=null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
         {
             args.interactableObject.transform.gameObject.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorch);
         }
@@ -29,7 +29,7 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
 
     public void Detach(SelectExitEventArgs args)
     {
-        if (args.interactableObject.transform.gameObject.GetComponent<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().IsFireStopped)
+        if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
         {
             args.interactableObject.transform.gameObject.SetLayerRecursively(m_defaultFireCollisionLayer);
         }
