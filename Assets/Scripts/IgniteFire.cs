@@ -71,7 +71,7 @@ public class IgniteFire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+       
         if (other.gameObject.tag == "FireFlame" && m_isFireStopped)
         {
             StartFire();

@@ -22,7 +22,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
        if(args.interactableObject.transform.CompareTag(m_torchTag))
         {
             m_playerSockets.m_playerAllTorches.Add(args.interactableObject.transform.gameObject);
-            if (args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().Fire.isPlaying)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().Fire.isPlaying)
             {
                 m_playerSockets.m_playerFiringTorches.Add(args.interactableObject.transform.gameObject);
             }
@@ -53,7 +53,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
         if (args.interactableObject.transform.CompareTag(m_torchTag))            
         {
             m_playerSockets.m_playerAllTorches.Remove(args.interactableObject.transform.gameObject);
-            if (args.interactableObject.transform.gameObject.GetComponent<IgniteFire>().Fire.isPlaying)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().Fire.isPlaying)
             {
                 m_playerSockets.m_playerFiringTorches.Remove(args.interactableObject.transform.gameObject);
             }

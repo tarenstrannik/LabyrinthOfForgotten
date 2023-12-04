@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ffe233d75368d4d8095aea05011a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_igniteFire: {fileID: 1283529553887993241}
+  m_igniteFire: {fileID: 4443323105447445534}
   m_invisibleRendererLayer: 22
 --- !u!1 &2629504936863995766
 GameObject:
@@ -109,13 +109,14 @@ GameObject:
   - component: {fileID: 1047514774233918439}
   - component: {fileID: 949985839250987281}
   - component: {fileID: 3369867379835130005}
-  - component: {fileID: 1253830602122703311}
-  - component: {fileID: 1283529553887993241}
   - component: {fileID: 1017660308657401985}
-  - component: {fileID: 7425706003625778607}
-  - component: {fileID: 3475058569171059262}
   - component: {fileID: 8650366413733999992}
   - component: {fileID: 7409143173598364136}
+  - component: {fileID: 4443323105447445534}
+  - component: {fileID: 8907028526651949840}
+  - component: {fileID: 6601000473117844320}
+  - component: {fileID: 4337648208801017984}
+  - component: {fileID: 7213683984475674716}
   m_Layer: 12
   m_Name: Torch
   m_TagString: Torch
@@ -373,54 +374,6 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!65 &1253830602122703311
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629504936863995766}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.29902184, z: 0.1}
-  m_Center: {x: 0, y: 0.25048906, z: 0}
---- !u!114 &1283529553887993241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629504936863995766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18cc8c74213588343a68fbcc1d20c584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Fire: {fileID: 4217118837736105488}
-  m_Smoke: {fileID: 6498621791529782173}
-  m_fireAudio: {fileID: 4999868952079905061}
-  m_fireOneShotAudio: {fileID: 5449597346638450218}
-  m_fireFadingAudio: {fileID: 8300000, guid: 8e2d18aa5bd4eaf4d86083113d030460, type: 3}
-  m_fireLight: {fileID: 5017495315763234847}
-  m_FireRug: {fileID: 7671649562025141012}
-  m_firing: {fileID: 2100000, guid: f5bab49dd303cbd459c88a95b7fa25f2, type: 2}
-  m_noFiring: {fileID: 2100000, guid: 83814ea2a7dbd2d488d711b9e48a2b61, type: 2}
-  m_collisionLayerToExcludeBody: 15
-  m_collisionLayerToExcludeBodyIfFiringTorchInHand: 19
-  m_collisionLayerToExcludeBodyIfInBackpack: 16
-  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 20
-  m_defaultCollisionLayer: 12
-  m_defaultFireCollisionLayer: 18
 --- !u!114 &1017660308657401985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb756a4b82b24040a468c0a73063e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginThreshold: 4
+  beginThreshold: 2
   endThreshold: 0.25
   OnBegin:
     m_PersistentCalls:
@@ -453,34 +406,6 @@ MonoBehaviour:
   OnEnd:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7425706003625778607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629504936863995766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acae567af53335746aa625db011f1b7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_objectMaterial: 1
---- !u!114 &3475058569171059262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629504936863995766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62276f2201a1cd14fb1ee0da18c7c69b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AudioSource: {fileID: 5449597346638450218}
-  m_MaxSoundVelocity: 3
-  m_repeatCollisionDelay: 0.5
 --- !u!114 &8650366413733999992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,6 +435,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerTag: Player
   m_player: {fileID: 0}
+--- !u!114 &4443323105447445534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629504936863995766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cc8c74213588343a68fbcc1d20c584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Fire: {fileID: 4217118837736105488}
+  m_Smoke: {fileID: 6498621791529782173}
+  m_fireAudio: {fileID: 4999868952079905061}
+  m_fireOneShotAudio: {fileID: 5449597346638450218}
+  m_fireFadingAudio: {fileID: 8300000, guid: 8e2d18aa5bd4eaf4d86083113d030460, type: 3}
+  m_fireLight: {fileID: 5017495315763234847}
+  m_FireRug: {fileID: 7671649562025141012}
+  m_firing: {fileID: 2100000, guid: f5bab49dd303cbd459c88a95b7fa25f2, type: 2}
+  m_noFiring: {fileID: 2100000, guid: 83814ea2a7dbd2d488d711b9e48a2b61, type: 2}
+  m_collisionLayerToExcludeBody: 15
+  m_collisionLayerToExcludeBodyIfFiringTorchInHand: 19
+  m_collisionLayerToExcludeBodyIfInBackpack: 16
+  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 20
+  m_defaultCollisionLayer: 12
+  m_defaultFireCollisionLayer: 18
+--- !u!114 &8907028526651949840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629504936863995766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62276f2201a1cd14fb1ee0da18c7c69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AudioSource: {fileID: 5449597346638450218}
+  m_MaxSoundVelocity: 3
+  m_repeatCollisionDelay: 0.5
+--- !u!114 &6601000473117844320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629504936863995766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae567af53335746aa625db011f1b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objectMaterial: 1
+--- !u!65 &4337648208801017984
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629504936863995766}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.03, y: 0.4094746, z: 0.03}
+  m_Center: {x: 0, y: -0.09637916, z: 0}
+--- !u!65 &7213683984475674716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629504936863995766}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.1, y: 0.3, z: 0.1}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!1 &5038183761292914757
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,8 +720,6 @@ GameObject:
   - component: {fileID: 3930688293294733704}
   - component: {fileID: 8806179823696352099}
   - component: {fileID: 2998700049097616204}
-  - component: {fileID: 2618513447422148721}
-  - component: {fileID: 686311703654284922}
   m_Layer: 12
   m_Name: TorchHandle
   m_TagString: Untagged
@@ -772,42 +792,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2618513447422148721
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6061637689989316366}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.6753631, z: 1}
-  m_Center: {x: 0, y: -0.16231835, z: 0}
---- !u!114 &686311703654284922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6061637689989316366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62276f2201a1cd14fb1ee0da18c7c69b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AudioSource: {fileID: 5449597346638450218}
-  m_MaxSoundVelocity: 3
-  m_repeatCollisionDelay: 0.5
 --- !u!1 &8395532869144501246
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +805,7 @@ GameObject:
   - component: {fileID: 7671649562025141012}
   m_Layer: 12
   m_Name: TorchRug
-  m_TagString: Untagged
+  m_TagString: Torch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

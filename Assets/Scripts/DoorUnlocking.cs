@@ -32,7 +32,8 @@ public class DoorUnlocking : MonoBehaviour
             m_isLocked = false;
             m_doorAnimator.enabled = true;
             m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationY;
-
+            m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationX;
+            m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationZ;
             m_doorAnimator.SetTrigger("t_OpenDoor");
             StartCoroutine(GivePlayerControl());
             m_doorAudio.Play();
