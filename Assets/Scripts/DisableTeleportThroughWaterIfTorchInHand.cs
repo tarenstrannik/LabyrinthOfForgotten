@@ -21,6 +21,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
     {
        if(args.interactableObject.transform.CompareTag(m_torchTag))
         {
+
             m_playerSockets.m_playerAllTorches.Add(args.interactableObject.transform.gameObject);
             if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().Fire.isPlaying)
             {
@@ -31,6 +32,7 @@ public class DisableTeleportThroughWaterIfTorchInHand : MonoBehaviour
     }
     private void AddPlayerFiringTorchAndEnableWaterCollider(GameObject obj)
     {
+
         if (m_playerSockets.m_playerAllTorches.Contains(obj))
         {
             m_playerSockets.m_playerFiringTorches.Add(obj);

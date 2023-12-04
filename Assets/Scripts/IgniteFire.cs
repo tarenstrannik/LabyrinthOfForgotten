@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using Unity.XR.CoreUtils;
 using UnityEngine;
 
@@ -47,13 +48,23 @@ public class IgniteFire : MonoBehaviour
             return m_isFireStopped;
         }
     }
+    [SerializeField] private string m_torchTag="Torch";
+    private GameObject m_torch;
 
+    [SerializeField] private SaveLinkOnControllerSelectedObject m_controllerSaver;
 
     private void Awake()
     {
         m_isFireStopped = m_Fire.isStopped;
         m_lightVariation = m_fireLight.GetComponent<LightVariation>();
-       
+        if (transform.parent.gameObject.CompareTag(m_torchTag))
+        {
+            m_torch = transform.parent.gameObject;
+        }
+        else
+        {
+            m_torch = gameObject;
+        }
 
     }
     private void OnParticleCollision(GameObject other)
@@ -89,7 +100,11 @@ public class IgniteFire : MonoBehaviour
         m_fireAudio.Stop();
         m_fireOneShotAudio.volume = 1;
         m_fireOneShotAudio.PlayOneShot(m_fireFadingAudio);
-        if(GetComponent<SaveLinkOnControllerSelectedObject>().Controller != null) GetComponent<SaveLinkOnControllerSelectedObject>().Controller.SendMessage("RemovePlayerFiringTorchAndDisableWaterCollider", gameObject, SendMessageOptions.DontRequireReceiver);
+        if (m_controllerSaver.Controller != null)
+        {
+
+            m_controllerSaver.Controller.SendMessage("RemovePlayerFiringTorchAndDisableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
+        }
         ChangeLayer();
     }
 
@@ -100,8 +115,8 @@ public class IgniteFire : MonoBehaviour
         m_FireRug.material = m_firing;
         m_fireLight.enabled = true;
         m_lightVariation.StartLightVariation();
-        if (GetComponent<SaveLinkOnControllerSelectedObject>().Controller != null)
-            GetComponent<SaveLinkOnControllerSelectedObject>().Controller.SendMessage("AddPlayerFiringTorchAndEnableWaterCollider", gameObject, SendMessageOptions.DontRequireReceiver);
+        if (m_controllerSaver.Controller != null)
+            m_controllerSaver.Controller.SendMessage("AddPlayerFiringTorchAndEnableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
         ChangeLayer();
 
     }

@@ -33,14 +33,17 @@ public class ToggleWaterfallColliderTemporaly : MonoBehaviour
     private Coroutine m_turnOffWaterColliderCoroutine;
     public void TurnOffWaterCollider()
     {
-        if(m_isFromWater)
+        if (m_waterCollider.enabled)
         {
-            if (m_turnOffWaterColliderCoroutine != null)
+            if (m_isFromWater)
             {
-                
-                StopCoroutine(m_turnOffWaterColliderCoroutine);
+                if (m_turnOffWaterColliderCoroutine != null)
+                {
+
+                    StopCoroutine(m_turnOffWaterColliderCoroutine);
+                }
+                m_turnOffWaterColliderCoroutine = StartCoroutine(ITurnOffWaterCollider());
             }
-            m_turnOffWaterColliderCoroutine = StartCoroutine(ITurnOffWaterCollider());
         }
     }
     private IEnumerator ITurnOffWaterCollider()
