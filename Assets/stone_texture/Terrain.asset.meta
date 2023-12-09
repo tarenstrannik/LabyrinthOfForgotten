@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc15765f784c3e54baabcb883feaed5c
+timeCreated: 1467713457
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66497
+  packageName: Stone Cliff Texture
+  packageVersion: 1.0
+  assetPath: Assets/stone_texture/Terrain.asset
+  uploadId: 125756

@@ -17,6 +17,10 @@ public class PressingPlateScript : MonoBehaviour
 
 
     private Coroutine m_MoveplateCoroutine = null;
+
+    private Coroutine m_MoveplateWIthDelayCoroutine = null;
+    private Coroutine m_SendCommandWIthDelayCoroutine = null;
+
     private float m_curTime;
 
     [SerializeField] private float[] m_stageMoveTime = { 3f};
@@ -25,10 +29,10 @@ public class PressingPlateScript : MonoBehaviour
     [SerializeField] private List<Collider> m_Collider;
 
     [SerializeField] private float  m_maxMass = 60f;
-    private float m_curMass = 0f;
+    private float m_curMass = 0f; //
 
     [Tooltip("The list of colliders to use for detecting weight. If not selected any, using all colliders of object and it's children")]
-    private List<GameObject> m_currentColliders = new List<GameObject>();
+    private List<GameObject> m_currentColliders = new List<GameObject>();//
 
     private bool m_doorOpened=false;
 
@@ -44,9 +48,16 @@ public class PressingPlateScript : MonoBehaviour
 
     public void Moveplate(float endTimePercent, float allTime)
     {
-        
-        StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
-        StartCoroutine(SendMoveCommandToDoorWithDelay(endTimePercent, allTime));
+        if (m_MoveplateWIthDelayCoroutine != null)
+        {
+            StopCoroutine(m_MoveplateWIthDelayCoroutine);
+        }
+        if (m_SendCommandWIthDelayCoroutine != null)
+        {
+            StopCoroutine(m_SendCommandWIthDelayCoroutine);
+        }
+        m_MoveplateWIthDelayCoroutine =StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
+        m_SendCommandWIthDelayCoroutine=StartCoroutine(SendMoveCommandToDoorWithDelay(endTimePercent, allTime));
     }
 
     private IEnumerator SendMoveCommandToDoorWithDelay(float endTimePercent, float allTime)
@@ -57,6 +68,7 @@ public class PressingPlateScript : MonoBehaviour
         }
         
         m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoor(endTimePercent, allTime);
+        m_SendCommandWIthDelayCoroutine = null;
     }
 
     private IEnumerator MovePlateWithDelay(float endTimePercent, float allTime)
@@ -73,6 +85,7 @@ public class PressingPlateScript : MonoBehaviour
             StopMovingplateCoroutine(m_MoveplateCoroutine);
         }
         m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, endTimePercent, allTime));
+        m_MoveplateWIthDelayCoroutine = null;
     }
 
     private void StopMovingplateCoroutine(Coroutine cor)
@@ -141,8 +154,8 @@ public class PressingPlateScript : MonoBehaviour
                     m_currentColliders.Add(collision.gameObject);
 
                     m_curMass += colRb.mass;
-
-                    Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+                    var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
+                    Moveplate(targetMass, m_stageMoveTime[0]);
 
 
                 }
@@ -176,6 +189,7 @@ public class PressingPlateScript : MonoBehaviour
             if (other.gameObject.GetComponent<Rigidbody>() != null)
             {
                 m_curMass -= other.gameObject.GetComponent<Rigidbody>().mass;
+                if (m_curMass < 0) m_curMass = 0;
             }
             
             if (m_curMass < m_maxMass && m_doorOpened)
@@ -185,9 +199,10 @@ public class PressingPlateScript : MonoBehaviour
 
                 m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
             }
-            
+            var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
 
-            Moveplate(m_curMass / m_maxMass, m_stageMoveTime[0]);
+
+            Moveplate(targetMass, m_stageMoveTime[0]);
         }
     }
 }

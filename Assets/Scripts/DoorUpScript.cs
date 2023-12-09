@@ -82,10 +82,10 @@ public class DoorUpScript : MonoBehaviour
     {
         if (m_curStage == 1)
         {
-
+            m_transparentDoor.transform.position= m_startTransforms[0].position;
             m_doorAudioSource.pitch = m_startPitch * m_stageMoveTime[1] / m_MoveDownTimeSecondStage;
 
-            GameObject[] obj = { m_pruty, m_transparentDoor };
+            GameObject[] obj = { m_pruty }; //GameObject[] obj = { m_pruty, m_transparentDoor };
             GameObject[] objectsToMove = obj;
             
 
@@ -162,7 +162,7 @@ public class DoorUpScript : MonoBehaviour
         else if (m_curTime / allTime<=0 && m_curStage ==1)
         {
             m_curStage = 0;
-            m_transparentDoor.transform.position= m_startTransforms[0].position;
+            //m_transparentDoor.transform.position= m_startTransforms[0].position;
             m_curPercent = 1;
             m_isFalling = false;
             m_MoveDoorCoroutine = null;
