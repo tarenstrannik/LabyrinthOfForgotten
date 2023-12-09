@@ -10698,7 +10698,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh39248
+  m_Name: pb_Mesh-4388
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -11068,7 +11068,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh40384
+  m_Name: pb_Mesh-4072
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -12626,7 +12626,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh42442
+  m_Name: pb_Mesh-6246
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -16677,7 +16677,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh41798
+  m_Name: pb_Mesh-6208
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -17705,7 +17705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Labirint of Forgotten
+  m_text: The Labyrinth of Forgotten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18047,7 +18047,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh41380
+  m_Name: pb_Mesh-4110
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -18877,7 +18877,7 @@ PrefabInstance:
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: -0.102
       objectReference: {fileID: 0}
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
@@ -20853,7 +20853,7 @@ PrefabInstance:
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
@@ -22116,7 +22116,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43392
+  m_Name: pb_Mesh32350
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -23726,7 +23726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Labyrinth of Forgotten
+  m_text: The Labyrinth of Forgotten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -24988,7 +24988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Labirint of Forgotten
+  m_text: The Labyrinth of Forgotten
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25127,7 +25127,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38518
+  m_Name: pb_Mesh-6524
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -41450,7 +41450,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh43764
+  m_Name: pb_Mesh-4958
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -46292,7 +46292,7 @@ PrefabInstance:
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: 5049891831870563521, guid: 785d5445126492f4bb2644f7087814f0,
         type: 3}
