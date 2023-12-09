@@ -148,9 +148,9 @@ public class DoorUpScript : MonoBehaviour
         if (m_curTime / allTime >= 1 && m_curStage==0)
         {
             var curPause = m_pauseTime;
-            while(m_pauseTime>=0)
+            while(curPause >= 0)
             {
-                m_pauseTime -= Time.deltaTime;
+                curPause -= Time.deltaTime;
                 yield return null;
             }
             //yield return new WaitForSeconds(m_pauseTime);
