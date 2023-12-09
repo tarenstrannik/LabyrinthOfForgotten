@@ -19,7 +19,7 @@ public class IgniteFire : MonoBehaviour
     [SerializeField] private Light m_fireLight;
     public Light FireLight
     {
-        get 
+        get
         {
             return m_fireLight;
         }
@@ -48,7 +48,7 @@ public class IgniteFire : MonoBehaviour
             return m_isFireStopped;
         }
     }
-    [SerializeField] private string m_torchTag="Torch";
+    [SerializeField] private string m_torchTag = "Torch";
     private GameObject m_torch;
 
     [SerializeField] private SaveLinkOnControllerSelectedObject m_controllerSaver;
@@ -56,7 +56,7 @@ public class IgniteFire : MonoBehaviour
     private void Awake()
     {
         m_isFireStopped = m_Fire.isStopped;
-        m_lightVariation = m_fireLight.GetComponent<LightVariation>();
+        if (m_fireLight != null) m_lightVariation = m_fireLight.GetComponent<LightVariation>();
         if (transform.parent && transform.parent.gameObject.CompareTag(m_torchTag))
         {
             m_torch = transform.parent.gameObject;
@@ -69,20 +69,20 @@ public class IgniteFire : MonoBehaviour
     }
     private void OnParticleCollision(GameObject other)
     {
-        if (other.tag=="FireFlame" && m_isFireStopped)
+        if (other.tag == "FireFlame" && m_isFireStopped)
         {
             StartFire();
-            
+
         }
-        else if(other.tag =="Water" && !m_isFireStopped)
+        else if (other.tag == "Water" && !m_isFireStopped)
         {
-            StopFire();   
+            StopFire();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-       
+
         if (other.gameObject.tag == "FireFlame" && m_isFireStopped)
         {
             StartFire();
@@ -92,17 +92,21 @@ public class IgniteFire : MonoBehaviour
     private void StopFire()
     {
         m_isFireStopped = true;
-        m_fireLight.enabled = false;
-        m_lightVariation.StopLightVariation();
-        m_FireRug.material = m_noFiring;
+        if (m_fireLight != null) m_fireLight.enabled = false;
+        if (m_lightVariation != null) m_lightVariation.StopLightVariation();
+        if (m_FireRug != null) m_FireRug.material = m_noFiring;
         m_Fire.Stop();
-        m_Smoke.Play();
-        m_fireAudio.Stop();
-        m_fireOneShotAudio.volume = 1;
-        m_fireOneShotAudio.PlayOneShot(m_fireFadingAudio);
+        if (m_Smoke != null) m_Smoke.Play();
+        if (m_fireAudio != null) m_fireAudio.Stop();
+        if (m_fireOneShotAudio != null)
+
+
+        {
+            m_fireOneShotAudio.volume = 1;
+            m_fireOneShotAudio.PlayOneShot(m_fireFadingAudio);
+        }
         if (m_controllerSaver.Controller != null)
         {
-
             m_controllerSaver.Controller.SendMessage("RemovePlayerFiringTorchAndDisableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
         }
         ChangeLayer();
@@ -112,11 +116,11 @@ public class IgniteFire : MonoBehaviour
     {
         m_isFireStopped = false;
         m_Fire.Play();
-        m_fireAudio.Play();
-        m_FireRug.material = m_firing;
-        m_fireLight.enabled = true;
-        m_lightVariation.StartLightVariation();
-        if (m_controllerSaver.Controller != null)
+        if (m_fireAudio != null) m_fireAudio.Play();
+        if (m_FireRug != null) m_FireRug.material = m_firing;
+        if (m_fireLight != null) m_fireLight.enabled = true;
+        if (m_lightVariation != null) m_lightVariation.StartLightVariation();
+        if (m_controllerSaver != null && m_controllerSaver.Controller != null)
             m_controllerSaver.Controller.SendMessage("AddPlayerFiringTorchAndEnableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
         ChangeLayer();
 
@@ -124,29 +128,40 @@ public class IgniteFire : MonoBehaviour
 
     private void ChangeLayer()
     {
-        if (gameObject.layer == m_collisionLayerToExcludeBody)
+        GameObject objectToChangeLayerRec;
+        if (transform.parent && transform.parent.gameObject.CompareTag(m_torchTag))
         {
-            gameObject.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInHand);
+            objectToChangeLayerRec = transform.parent.gameObject;
         }
-        else if (gameObject.layer == m_collisionLayerToExcludeBodyIfFiringTorchInHand)
+        else
         {
-            gameObject.SetLayerRecursively(m_collisionLayerToExcludeBody);
+            objectToChangeLayerRec = gameObject;
+        };
+
+
+        if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBody)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInHand);
         }
-        else if (gameObject.layer == m_collisionLayerToExcludeBodyIfInBackpack)
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInHand)
         {
-            gameObject.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInBackpack);
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBody);
         }
-        else if (gameObject.layer == m_collisionLayerToExcludeBodyIfFiringTorchInBackpack)
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfInBackpack)
         {
-            gameObject.SetLayerRecursively(m_collisionLayerToExcludeBodyIfInBackpack);
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInBackpack);
         }
-        else if (gameObject.layer == m_defaultCollisionLayer)
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInBackpack)
         {
-            gameObject.SetLayerRecursively(m_defaultFireCollisionLayer);
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfInBackpack);
         }
-        else if (gameObject.layer == m_defaultFireCollisionLayer)
+        else if (objectToChangeLayerRec.layer == m_defaultCollisionLayer)
         {
-            gameObject.SetLayerRecursively(m_defaultCollisionLayer);
+            objectToChangeLayerRec.SetLayerRecursively(m_defaultFireCollisionLayer);
+        }
+        else if (objectToChangeLayerRec.layer == m_defaultFireCollisionLayer)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_defaultCollisionLayer);
         }
     }
 
