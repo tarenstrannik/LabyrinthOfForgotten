@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 2632387745692174971}
   - component: {fileID: 3837132838212425839}
   - component: {fileID: 4818378172831959423}
+  - component: {fileID: 2924815193186396735}
   m_Layer: 12
   m_Name: Stone
   m_TagString: Untagged
@@ -187,7 +188,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 8
+    m_Bits: 2088
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -445,3 +446,15 @@ MonoBehaviour:
   m_AudioSource: {fileID: 0}
   m_MaxSoundVelocity: 5
   m_repeatCollisionDelay: 0.5
+--- !u!114 &2924815193186396735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679743488380714230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c2fb777c0663b44b0e8135cecfe5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 1564697422926620637}
   - component: {fileID: 3538836464681541441}
   - component: {fileID: 8493736132576014526}
+  - component: {fileID: 6724793138601036889}
   m_Layer: 12
   m_Name: TorchTwoPartVariant
   m_TagString: Torch
@@ -192,7 +193,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 2
+    m_Bits: 2082
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -483,7 +484,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -519,6 +520,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerTag: Player
   m_player: {fileID: 0}
+--- !u!114 &6724793138601036889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840620362047611373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c2fb777c0663b44b0e8135cecfe5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1872611543995510299
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,10 +744,16 @@ MonoBehaviour:
   m_FireRug: {fileID: 8436130978783295329}
   m_firing: {fileID: 2100000, guid: f5bab49dd303cbd459c88a95b7fa25f2, type: 2}
   m_noFiring: {fileID: 2100000, guid: 83814ea2a7dbd2d488d711b9e48a2b61, type: 2}
-  m_collisionLayerToExcludeBody: 15
-  m_collisionLayerToExcludeBodyIfFiringTorchInHand: 19
+  m_collisionLayerInLeftHand: 14
+  m_collisionLayerInRightHand: 15
+  m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand: 19
+  m_collisionLayerToExcludeBodyIfFiringTorchInRightHand: 20
+  m_collisionLayerInLeftRayHand: 26
+  m_collisionLayerInRightRayHand: 25
+  m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand: 28
+  m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand: 27
   m_collisionLayerToExcludeBodyIfInBackpack: 16
-  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 20
+  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 21
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
   m_torchTag: Torch
@@ -6433,7 +6452,7 @@ PrefabInstance:
     - target: {fileID: 5316484578057880337, guid: 464290ea0f9b5794eb9a2ce4917f33c0,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5316484578057880337, guid: 464290ea0f9b5794eb9a2ce4917f33c0,
         type: 3}
@@ -6483,7 +6502,7 @@ PrefabInstance:
     - target: {fileID: 7227115643074135805, guid: 464290ea0f9b5794eb9a2ce4917f33c0,
         type: 3}
       propertyPath: m_AdditionalLightsShadowResolutionTier
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

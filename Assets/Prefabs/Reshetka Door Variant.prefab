@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5264017505708569958, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5601981076085204594, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_LocalScale.y

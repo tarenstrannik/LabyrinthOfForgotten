@@ -9,6 +9,7 @@ public class FadeCanvas : MonoBehaviour
 {
     [Tooltip("The speed at which the canvas fades")]
     public float defaultDuration = 1.0f;
+    public float delayBeforeStart = 2.0f;
 
     public Coroutine CurrentRoutine { private set; get; } = null;
 
@@ -31,7 +32,8 @@ public class FadeCanvas : MonoBehaviour
     public void StartFadeOut()
     {
         StopAllCoroutines();
-        CurrentRoutine = StartCoroutine(FadeOut(defaultDuration));
+        
+        CurrentRoutine = StartCoroutine(Delay(delayBeforeStart,1));
     }
 
     public void QuickFadeIn()
@@ -57,7 +59,12 @@ public class FadeCanvas : MonoBehaviour
             yield return null;
         }
     }
-
+    private IEnumerator Delay(float duration, float alpha)
+    {
+        SetAlpha(alpha);
+        yield return new WaitForSeconds(duration);
+        CurrentRoutine = StartCoroutine(FadeOut(defaultDuration));
+    }
     private IEnumerator FadeOut(float duration)
     {
         float elapsedTime = 0.0f;
@@ -69,6 +76,7 @@ public class FadeCanvas : MonoBehaviour
             yield return null;
         }
     }
+
 
     private void SetAlpha(float value)
     {

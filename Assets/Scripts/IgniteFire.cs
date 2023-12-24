@@ -30,8 +30,17 @@ public class IgniteFire : MonoBehaviour
     [SerializeField] Material m_firing;
     [SerializeField] Material m_noFiring;
 
-    [SerializeField] private int m_collisionLayerToExcludeBody;
-    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInHand;
+    [SerializeField] private int m_collisionLayerInLeftHand;
+    [SerializeField] private int m_collisionLayerInRightHand;
+
+    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand;
+    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInRightHand;
+
+    [SerializeField] private int m_collisionLayerInLeftRayHand;
+    [SerializeField] private int m_collisionLayerInRightRayHand;
+
+    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand;
+    [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand;
 
     [SerializeField] private int m_collisionLayerToExcludeBodyIfInBackpack;
     [SerializeField] private int m_collisionLayerToExcludeBodyIfFiringTorchInBackpack;
@@ -137,16 +146,45 @@ public class IgniteFire : MonoBehaviour
         {
             objectToChangeLayerRec = gameObject;
         };
+        
+
+        if (objectToChangeLayerRec.layer == m_collisionLayerInLeftHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand);
+        }
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerInLeftHand);
+        }
+
+        if (objectToChangeLayerRec.layer == m_collisionLayerInRightHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInRightHand);
+        }
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInRightHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerInRightHand);
+        }
+
+        if (objectToChangeLayerRec.layer == m_collisionLayerInLeftRayHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand);
+        }
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerInLeftRayHand);
+        }
+
+        if (objectToChangeLayerRec.layer == m_collisionLayerInRightRayHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand);
+        }
+        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand)
+        {
+            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerInRightRayHand);
+        }
 
 
-        if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBody)
-        {
-            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInHand);
-        }
-        else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfFiringTorchInHand)
-        {
-            objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBody);
-        }
         else if (objectToChangeLayerRec.layer == m_collisionLayerToExcludeBodyIfInBackpack)
         {
             objectToChangeLayerRec.SetLayerRecursively(m_collisionLayerToExcludeBodyIfFiringTorchInBackpack);

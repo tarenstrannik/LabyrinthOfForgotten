@@ -146,20 +146,22 @@ public class PressingPlateScript : MonoBehaviour
         if (m_Collider.Contains(collision.GetContact(0).thisCollider) || m_Collider.Count==0)
         {
             
-            if (!m_doorOpened)
-            {
+            
                 var colRb = collision.gameObject.GetComponent<Rigidbody>();
                 if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
                 {
                     m_currentColliders.Add(collision.gameObject);
 
                     m_curMass += colRb.mass;
-                    var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
-                    Moveplate(targetMass, m_stageMoveTime[0]);
+                    if (!m_doorOpened)
+                    {
+                        var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
+                        Moveplate(targetMass, m_stageMoveTime[0]);
+                    }
 
 
                 }
-            }
+            
         }
      }
     /*
@@ -192,17 +194,22 @@ public class PressingPlateScript : MonoBehaviour
                 if (m_curMass < 0) m_curMass = 0;
             }
             
-            if (m_curMass < m_maxMass && m_doorOpened)
+            if (m_curMass < m_maxMass)
             {
-                m_doorOpened = false;
-                m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
+                if (m_doorOpened)
+                {
+                    m_doorOpened = false;
+                    m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
 
-                m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
+                    m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
+                }
+                var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
+
+
+                Moveplate(targetMass, m_stageMoveTime[0]);
             }
-            var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
 
-
-            Moveplate(targetMass, m_stageMoveTime[0]);
+           
         }
     }
 }

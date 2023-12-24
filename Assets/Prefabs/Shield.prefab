@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1160507033352955583}
   - component: {fileID: 39027321502990843}
   - component: {fileID: 2698230505934355926}
+  - component: {fileID: 4423855790914380951}
   m_Layer: 12
   m_Name: Shield
   m_TagString: Untagged
@@ -156,7 +157,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 552
+    m_Bits: 2600
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_FocusMode: 1
@@ -303,6 +304,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectMaterial: 3
+--- !u!114 &4423855790914380951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322017620466258871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c2fb777c0663b44b0e8135cecfe5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4157039058236812651
 GameObject:
   m_ObjectHideFlags: 0
