@@ -8,6 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 928085818381258017, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1005352408551333242, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725604020509050604, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2273297249113828763, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -16,6 +31,16 @@ PrefabInstance:
     - target: {fileID: 2273297249113828763, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2305919063807825279, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490284674199759334, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2659414315847222594, guid: ac89f123dc466f44ca809b1defc17cc6,
@@ -28,6 +53,16 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2717822262341125868, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026245360291049361, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3161191570414085625, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -36,6 +71,11 @@ PrefabInstance:
     - target: {fileID: 3161191570414085625, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3162689287461576820, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3290917273410392196, guid: ac89f123dc466f44ca809b1defc17cc6,
@@ -53,6 +93,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Reshetka Door Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3753307533193698234, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978694462311502025, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4032831670946105601, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -63,6 +113,11 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4816412012396708607, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4959569383389936626, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -71,12 +126,27 @@ PrefabInstance:
     - target: {fileID: 4959569383389936626, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5051442613525873697, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053387940739452179, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5264017505708569958, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5273544242092252901, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5601981076085204594, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
@@ -143,6 +213,11 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7817657139421992019, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8636547085194270731, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -151,6 +226,11 @@ PrefabInstance:
     - target: {fileID: 8636547085194270731, guid: ac89f123dc466f44ca809b1defc17cc6,
         type: 3}
       propertyPath: m_StaticShadowCaster
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929958637482423654, guid: ac89f123dc466f44ca809b1defc17cc6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9065456932098231736, guid: ac89f123dc466f44ca809b1defc17cc6,

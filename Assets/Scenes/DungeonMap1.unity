@@ -5,8 +5,8 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
-    smallestHole: 0.25
+    smallestOccluder: 3
+    smallestHole: 0.1
     backfaceThreshold: 100
   m_SceneGUID: 99c9720ab356a0642a771bea13969a05
   m_OcclusionCullingData: {fileID: 36300000, guid: 96590629314788d41be377bf462d4869,
@@ -1195,7 +1195,7 @@ PrefabInstance:
     - target: {fileID: 2330409792834062328, guid: 9613f127c4654fd4ca17526faa6e34bb,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 3223314822245708454, guid: 9613f127c4654fd4ca17526faa6e34bb,
         type: 3}
@@ -12093,7 +12093,7 @@ PrefabInstance:
     - target: {fileID: 2708893186494378154, guid: ab8bc30cac3fdea4ebb6fed84ac46cbd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2708893186494378154, guid: ab8bc30cac3fdea4ebb6fed84ac46cbd,
         type: 3}
@@ -18869,7 +18869,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh446528
+  m_Name: pb_Mesh589826
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
