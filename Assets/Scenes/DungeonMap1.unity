@@ -1385,7 +1385,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_visibilityRenderer
       value: 
-      objectReference: {fileID: 1249688851}
+      objectReference: {fileID: 0}
     - target: {fileID: 8261476482716907878, guid: 9613f127c4654fd4ca17526faa6e34bb,
         type: 3}
       propertyPath: m_RenderingLayerMask
@@ -1401,8 +1401,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 8751221647735264563, guid: 9613f127c4654fd4ca17526faa6e34bb, type: 3}
+    - {fileID: 8060641588657154928, guid: 9613f127c4654fd4ca17526faa6e34bb, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 2330409792834062328, guid: 9613f127c4654fd4ca17526faa6e34bb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9613f127c4654fd4ca17526faa6e34bb, type: 3}
@@ -24667,12 +24670,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2a177701df37a64588ec92a5eea3ef7, type: 3}
---- !u!23 &1249688851 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5460795458057145508, guid: 9613f127c4654fd4ca17526faa6e34bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 110105575}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1285127443
 PrefabInstance:
   m_ObjectHideFlags: 0
