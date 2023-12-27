@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressingPlateScript : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PressingPlateScript : MonoBehaviour
 
     [SerializeField] GameObject m_plate;
 
+    public UnityEvent m_activatedEvent;
+    public UnityEvent m_deactivatedEvent;
 
     private Coroutine m_MoveplateCoroutine = null;
 
@@ -134,7 +137,7 @@ public class PressingPlateScript : MonoBehaviour
         if(m_curPercent >= 1)
         {
             m_doorOpened = true;
-            
+            m_activatedEvent.Invoke();
         }
         m_MoveplateCoroutine = null;
     }
@@ -200,7 +203,7 @@ public class PressingPlateScript : MonoBehaviour
                 {
                     m_doorOpened = false;
                     m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
-
+                    m_deactivatedEvent.Invoke();
                     m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
                 }
                 var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;

@@ -10,6 +10,9 @@ public class IgniteFire : MonoBehaviour
     [SerializeField] ParticleSystem m_Fire;
     public ParticleSystem Fire
     { get { return m_Fire; } }
+
+    [SerializeField] private Collider m_currentFlameCollider;
+
     [SerializeField] ParticleSystem m_Smoke;
     // Start is called before the first frame update
     [SerializeField] AudioSource m_fireAudio;
@@ -102,6 +105,7 @@ public class IgniteFire : MonoBehaviour
     {
         m_isFireStopped = true;
         if (m_fireLight != null) m_fireLight.enabled = false;
+        if (m_currentFlameCollider != null) m_currentFlameCollider.enabled = false;
         if (m_lightVariation != null) m_lightVariation.StopLightVariation();
         if (m_FireRug != null) m_FireRug.material = m_noFiring;
         m_Fire.Stop();
@@ -114,7 +118,7 @@ public class IgniteFire : MonoBehaviour
             m_fireOneShotAudio.volume = 1;
             m_fireOneShotAudio.PlayOneShot(m_fireFadingAudio);
         }
-        if (m_controllerSaver.Controller != null)
+        if (m_controllerSaver != null && m_controllerSaver.Controller != null)
         {
             m_controllerSaver.Controller.SendMessage("RemovePlayerFiringTorchAndDisableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
         }
@@ -125,12 +129,15 @@ public class IgniteFire : MonoBehaviour
     {
         m_isFireStopped = false;
         m_Fire.Play();
+        if (m_currentFlameCollider != null) m_currentFlameCollider.enabled = true;
         if (m_fireAudio != null) m_fireAudio.Play();
         if (m_FireRug != null) m_FireRug.material = m_firing;
         if (m_fireLight != null) m_fireLight.enabled = true;
         if (m_lightVariation != null) m_lightVariation.StartLightVariation();
         if (m_controllerSaver != null && m_controllerSaver.Controller != null)
+        {
             m_controllerSaver.Controller.SendMessage("AddPlayerFiringTorchAndEnableWaterCollider", m_torch, SendMessageOptions.DontRequireReceiver);
+        }
         ChangeLayer();
 
     }

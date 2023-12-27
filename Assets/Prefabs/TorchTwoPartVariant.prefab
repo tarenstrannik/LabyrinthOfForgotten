@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 2141120006690281899}
   - component: {fileID: 1564697422926620637}
   - component: {fileID: 3538836464681541441}
-  - component: {fileID: 8493736132576014526}
   - component: {fileID: 6724793138601036889}
   m_Layer: 12
   m_Name: TorchTwoPartVariant
@@ -226,7 +225,7 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8493736132576014526}
+      - m_Target: {fileID: 3538836464681541441}
         m_TargetAssemblyTypeName: SaveLinkOnControllerSelectedObject, Assembly-CSharp
         m_MethodName: SaveLinkToController
         m_Mode: 0
@@ -253,7 +252,7 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8493736132576014526}
+      - m_Target: {fileID: 3538836464681541441}
         m_TargetAssemblyTypeName: SaveLinkOnControllerSelectedObject, Assembly-CSharp
         m_MethodName: ClearLinkToController
         m_Mode: 1
@@ -506,20 +505,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerTag: Player
   m_player: {fileID: 0}
---- !u!114 &8493736132576014526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840620362047611373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57411404a8e81764cbd25fc2ae6bed8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlayerTag: Player
-  m_player: {fileID: 0}
 --- !u!114 &6724793138601036889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Fire: {fileID: 726667280163554582}
+  m_currentFlameCollider: {fileID: 2050738020544254122}
   m_Smoke: {fileID: 7449337625164643143}
   m_fireAudio: {fileID: 8181916632242866992}
   m_fireOneShotAudio: {fileID: 4524249340892581150}
@@ -757,7 +743,7 @@ MonoBehaviour:
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
   m_torchTag: Torch
-  m_controllerSaver: {fileID: 8493736132576014526}
+  m_controllerSaver: {fileID: 3538836464681541441}
 --- !u!54 &2921285195360734053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6110,7 +6096,7 @@ PrefabInstance:
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
-      value: 4440055
+      value: 130285559
       objectReference: {fileID: 0}
     - target: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
         type: 3}
@@ -6242,7 +6228,8 @@ PrefabInstance:
       propertyPath: m_BoundingSphereOverride.z
       value: 6.39e-43
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8039774094935352580, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -6362,6 +6349,12 @@ Transform:
 --- !u!198 &726667280163554582 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5377429380903153774, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
+    type: 3}
+  m_PrefabInstance: {fileID: 4662865593458193784}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &2050738020544254122 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 6683479080561206738, guid: 1505dd52bb51a4ef29ccbc27d77a9eb3,
     type: 3}
   m_PrefabInstance: {fileID: 4662865593458193784}
   m_PrefabAsset: {fileID: 0}

@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &8380176394932988229
 Transform:
@@ -89,7 +89,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8856537176223833939
 Transform:
@@ -130,6 +130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780377621897443495, guid: ecf7736a659284e99804c6bde923b1c6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6780377621897443496, guid: ecf7736a659284e99804c6bde923b1c6,
         type: 3}
@@ -309,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 6780377621897443499, guid: ecf7736a659284e99804c6bde923b1c6,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 300
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 6780377621897443499, guid: ecf7736a659284e99804c6bde923b1c6,
         type: 3}
@@ -319,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 6780377621897443499, guid: ecf7736a659284e99804c6bde923b1c6,
         type: 3}
       propertyPath: CollisionModule.collidesWith.m_Bits
-      value: 2086784
+      value: 532666240
       objectReference: {fileID: 0}
     - target: {fileID: 6780377621897443499, guid: ecf7736a659284e99804c6bde923b1c6,
         type: 3}

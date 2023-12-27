@@ -8,20 +8,6 @@ public class ToggleObjectRayInteractor : MonoBehaviour
 {
     [SerializeField] private XRRayInteractor m_rayInteractor;
 
-    [SerializeField] private bool m_isObjectInHand = false;
-
-    public bool IsObjectInHand
-    {
-        get
-        {
-            return m_isObjectInHand;
-        }
-        set
-        {
-            m_isObjectInHand = value;
-        }
-    }
-
 
     [SerializeField] private bool m_isHoveringUI = false;
 
@@ -38,6 +24,21 @@ public class ToggleObjectRayInteractor : MonoBehaviour
     }
 
 
+    [SerializeField] private bool m_isActive = false;
+
+    public bool IsActive
+    {
+        get
+        {
+            return m_isActive;
+        }
+        set
+        {
+            m_isActive = value;
+        }
+    }
+
+
     [SerializeField]  private XRDirectInteractor m_directInteractor;
 
     private void Awake()
@@ -49,7 +50,7 @@ public class ToggleObjectRayInteractor : MonoBehaviour
 
     public void EnableRayInteractorIfNoObjectInHand(SelectExitEventArgs args)
     {
-        if(!IsHoveringUI)
+        if(IsActive && !IsHoveringUI)
             m_rayInteractor.enabled=true;
 
     }
@@ -73,7 +74,7 @@ public class ToggleObjectRayInteractor : MonoBehaviour
     }
     public void ToggleRayInteractor(bool val)
     {
-        if (!IsHoveringUI && m_directInteractor.interactablesSelected.Count == 0)
+        if (IsActive&& !IsHoveringUI && m_directInteractor.interactablesSelected.Count == 0)
         {
             m_rayInteractor.enabled= val;
         }
