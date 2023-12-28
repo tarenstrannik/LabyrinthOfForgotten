@@ -29,6 +29,7 @@ public class DoorUpScript : MonoBehaviour
 
     private Coroutine m_MoveDoorCoroutine = null;
 
+
     private float m_curTime=0;
     private float m_curPercent=0;
 
@@ -172,11 +173,12 @@ public class DoorUpScript : MonoBehaviour
     /*--------------------for handle--------------*/
     public void MoveDoorFullFirstStage()
     {
-        m_doorAudioSource.pitch = m_startPitch * m_stageMoveTime[0] / m_stageMoveTime[1];
+        
         MoveDoor(1, m_stageMoveTime[m_curStage]);
 
         
     }
+  
     public void MoveDoorSecondStageUp()
     {
         

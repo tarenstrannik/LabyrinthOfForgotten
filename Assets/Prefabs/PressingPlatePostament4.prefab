@@ -481,6 +481,12 @@ MonoBehaviour:
   m_endTransforms:
   - {fileID: 4935656403632872019}
   m_plate: {fileID: 1034285687805954268}
+  m_activatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_deactivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_stageMoveTime:
   - 3
   m_LinkedDoor: {fileID: 0}
@@ -1450,7 +1456,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2278921799684149412}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 1

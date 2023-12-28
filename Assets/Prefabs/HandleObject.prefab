@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 7454631035111594935}
   - component: {fileID: 5580569713343320544}
   - component: {fileID: 7842002862306852659}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: HandleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,6 +386,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 685121887607397186}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 51105367861839486}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -430,7 +454,7 @@ GameObject:
   - component: {fileID: 1905664762557173991}
   - component: {fileID: 2955194132494396528}
   - component: {fileID: 4416605210200177468}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: HandlePedestal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
