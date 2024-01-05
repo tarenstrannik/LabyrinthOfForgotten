@@ -427,7 +427,7 @@ MonoBehaviour:
   m_OnSelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_ShowInteractableHoverMeshes: 1
+  m_ShowInteractableHoverMeshes: 0
   m_InteractableHoverMeshMaterial: {fileID: 2100000, guid: 0838a9e7de6ab2843a7c60433306c71f,
     type: 2}
   m_InteractableCantHoverMeshMaterial: {fileID: 2100000, guid: bc23bc1534f66f743aff20bfc8f2dcb6,
