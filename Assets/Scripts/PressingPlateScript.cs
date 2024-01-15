@@ -1,65 +1,134 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PressingPlateScript : MonoBehaviour
+public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 {
-    [SerializeField] private AudioSource m_plateAudioSource;
-    [SerializeField] private AudioSource m_plateClickAudioSource;
-    [SerializeField] private AudioClip m_movingEndedClick;
-
-
+    //moving options
     [SerializeField] private Transform[] m_startTransforms;
     [SerializeField] private Transform[] m_endTransforms;
 
+    //what to move
+    [Tooltip("This transform would be moved")]
+    [SerializeField] private Transform m_plate;
 
-    [SerializeField] GameObject m_plate;
+    //Collision and weight
+    [Header("Collision and weight options")]
 
-    public UnityEvent m_activatedEvent;
-    public UnityEvent m_deactivatedEvent;
+    [Tooltip("Object with component to track collisions")]
+    [SerializeField] private ICollisionDetector m_collisionDetector;
+
+    [Tooltip("Colliders on it and its child used to detect Enter Collision Event (if none any child would be used)")]
+    [SerializeField] private List<Collider> m_plateColliders;
+    private Dictionary<GameObject,float> m_currentObjectsOnPlate = new Dictionary<GameObject, float>();
+
+    [SerializeField] private float m_activationMass = 60f;
+    private float m_curMass = 0f; 
+
+
+    // Events
+    [Header("Events options")]
+
+    [SerializeField] private UnityEvent m_activatedEvent;
+    public UnityEvent OnMaxReachedEvent
+    {
+        get
+        {
+            return m_activatedEvent;
+        }
+
+    }
+    [SerializeField] private UnityEvent m_deactivatedEvent;
+    public UnityEvent OnMaxLeftEvent
+    {
+        get
+        {
+            return m_deactivatedEvent;
+        }
+
+    }
+
+    [SerializeField] private UnityEvent<float,float> m_positionChangeBeginEvent;
+    public UnityEvent<float, float> OnPositionChangeBegin
+    {
+        get
+        {
+            return m_positionChangeBeginEvent;
+        }
+
+    }
+    [SerializeField] private UnityEvent m_positionChangingEndEvent;
+    public UnityEvent OnPositionChangeEnd
+    {
+        get
+        {
+            return m_positionChangingEndEvent;
+        }
+    }
+
+    [SerializeField] private UnityEvent m_startPositionReachedEvent;
+    public UnityEvent OnMinReachedEvent 
+    { 
+        get
+        {
+            return m_startPositionReachedEvent;
+        }
+    }
+    public UnityEvent OnMinLeftEvent { get; }
+
+    //Coroutines
 
     private Coroutine m_MoveplateCoroutine = null;
 
-    private Coroutine m_MoveplateWIthDelayCoroutine = null;
+    private Coroutine m_MoveplateWithDelayCoroutine = null;
     private Coroutine m_SendCommandWIthDelayCoroutine = null;
 
     private float m_curTime;
-
+    [Header("Moving stages options")]
     [SerializeField] private float[] m_stageMoveTime = { 3f};
 
     [SerializeField] private GameObject m_LinkedDoor;
-    [SerializeField] private List<Collider> m_Collider;
 
-    [SerializeField] private float  m_maxMass = 60f;
-    private float m_curMass = 0f; //
-
-    [Tooltip("The list of colliders to use for detecting weight. If not selected any, using all colliders of object and it's children")]
-    private List<GameObject> m_currentColliders = new List<GameObject>();//
-
-    private bool m_doorOpened=false;
+    private bool m_plateActivated=false;
 
     private float m_curPercent=0;
 
-    private void Awake()
-    {
 
-        m_plate.transform.position = m_startTransforms[0].position;
-       
+    private void OnEnable()
+    {
+        OnPositionChangeBegin.AddListener(MovePlate);
+        m_collisionDetector.OnCollisionEnterDetection += OnCollisionEnter;
+        m_collisionDetector.OnTriggerExitDetection += OnTriggerExit;
+
+    }
+    private void OnDisable()
+    {
+        
+        OnPositionChangeBegin.RemoveListener(MovePlate);
+        m_collisionDetector.OnCollisionEnterDetection -= OnCollisionEnter;
+        m_collisionDetector.OnTriggerExitDetection -= OnTriggerExit;
     }
 
-
-    public void Moveplate(float endTimePercent, float allTime)
+    private void Awake()
     {
-        if (m_MoveplateWIthDelayCoroutine != null)
+        if (m_collisionDetector == null) m_collisionDetector = GetComponentInChildren<ICollisionDetector>();
+        m_plate.position = m_startTransforms[0].position;
+    }
+
+    private void MovePlate(float endTimePercent, float allTime)
+    {
+
+        if (m_MoveplateWithDelayCoroutine != null)
         {
-            StopCoroutine(m_MoveplateWIthDelayCoroutine);
+            StopCoroutine(m_MoveplateWithDelayCoroutine);
         }
         if (m_SendCommandWIthDelayCoroutine != null)
         {
             StopCoroutine(m_SendCommandWIthDelayCoroutine);
         }
-        m_MoveplateWIthDelayCoroutine =StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
+        m_MoveplateWithDelayCoroutine =StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
         m_SendCommandWIthDelayCoroutine=StartCoroutine(SendMoveCommandToDoorWithDelay(endTimePercent, allTime));
     }
 
@@ -81,26 +150,25 @@ public class PressingPlateScript : MonoBehaviour
         {
             yield return null;
         }
-        GameObject[] objectsToMove = { m_plate };
+        Transform[] objectsToMove = { m_plate };
 
         if (m_MoveplateCoroutine != null)
         {
-            StopMovingplateCoroutine(m_MoveplateCoroutine);
+            StopMovingPlateCoroutine(m_MoveplateCoroutine);
         }
         m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, endTimePercent, allTime));
-        m_MoveplateWIthDelayCoroutine = null;
+        m_MoveplateWithDelayCoroutine = null;
     }
 
-    private void StopMovingplateCoroutine(Coroutine cor)
+    private void StopMovingPlateCoroutine(Coroutine cor)
     {
         if (cor != null)
         {
             StopCoroutine(cor);
-            m_plateAudioSource.Pause();
             m_LinkedDoor.GetComponent<DoorUpScript>().StopMovingDoorCoroutine();
         }
     }
-    private IEnumerator IMoveplate(GameObject[] objectsToMove, float endTimePercent, float allTime)
+    private IEnumerator IMoveplate(Transform[] objectsToMove, float endTimePercent, float allTime)
     {
 
 
@@ -112,7 +180,7 @@ public class PressingPlateScript : MonoBehaviour
 
         m_curTime = m_curPercent * allTime;
 
-        m_plateAudioSource.Play();
+
 
         while (directionCoef * m_curTime <= directionCoef * endTimePercent * allTime)
         {
@@ -128,16 +196,17 @@ public class PressingPlateScript : MonoBehaviour
         m_curPercent = m_curTime / allTime;
         m_curPercent = m_curPercent > 1 ? 1 : m_curPercent;
         m_curPercent = m_curPercent < 0 ? 0 : m_curPercent;
-        m_plateAudioSource.Pause();
-        if (m_curPercent >= 1 || m_curPercent <= 0)
+
+        OnPositionChangeEnd.Invoke();
+        if (m_curPercent <= 0)
         {
-            m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
+            OnMinReachedEvent.Invoke();
         }
 
         if(m_curPercent >= 1)
         {
-            m_doorOpened = true;
-            m_activatedEvent.Invoke();
+            m_plateActivated = true;
+            OnMaxReachedEvent.Invoke();
         }
         m_MoveplateCoroutine = null;
     }
@@ -145,26 +214,23 @@ public class PressingPlateScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (m_Collider.Contains(collision.GetContact(0).thisCollider) || m_Collider.Count==0)
+
+        if (m_plateColliders.Count == 0 || m_plateColliders.Contains(collision.GetContact(0).thisCollider))
         {
-            
-            
-                var colRb = collision.gameObject.GetComponent<Rigidbody>();
-                if (!m_currentColliders.Contains(collision.gameObject) && colRb != null)
+            var colRb = collision.gameObject.GetComponent<Rigidbody>();
+            if (colRb != null && m_currentObjectsOnPlate.TryAdd(collision.gameObject, colRb.mass))
+            {
+                m_curMass += colRb.mass;
+                if (!m_plateActivated)
                 {
-                    m_currentColliders.Add(collision.gameObject);
-
-                    m_curMass += colRb.mass;
-                    if (!m_doorOpened)
-                    {
-                        var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
-                        Moveplate(targetMass, m_stageMoveTime[0]);
-                    }
-
-
+                    var targetMass = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
+                    //MovePlate(targetMass, m_stageMoveTime[0]);
+                    OnPositionChangeBegin.Invoke(targetMass, m_stageMoveTime[0]);
                 }
-            
+
+
+            }
+
         }
      }
     /*
@@ -187,29 +253,26 @@ public class PressingPlateScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-       
-        if (m_currentColliders.Contains(other.gameObject))
+
+        if (m_currentObjectsOnPlate.TryGetValue(other.gameObject, out var value))
         {
-            m_currentColliders.Remove(other.gameObject);
-            if (other.gameObject.GetComponent<Rigidbody>() != null)
-            {
-                m_curMass -= other.gameObject.GetComponent<Rigidbody>().mass;
-                if (m_curMass < 0) m_curMass = 0;
-            }
+
+            m_currentObjectsOnPlate.Remove(other.gameObject);
+            m_curMass -= value;
+            if (m_curMass < 0) m_curMass = 0;
+
             
-            if (m_curMass < m_maxMass)
+            if (m_curMass < m_activationMass)
             {
-                if (m_doorOpened)
+                if (m_plateActivated)
                 {
-                    m_doorOpened = false;
-                    m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
-                    m_deactivatedEvent.Invoke();
+                    m_plateActivated = false;
+                    OnMaxLeftEvent.Invoke();
                     m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
                 }
-                var targetMass = m_curMass > m_maxMass ? 1 : m_curMass / m_maxMass;
-
-
-                Moveplate(targetMass, m_stageMoveTime[0]);
+                var targetMass = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
+                //MovePlate(targetMass, m_stageMoveTime[0]);
+                OnPositionChangeBegin.Invoke(targetMass, m_stageMoveTime[0]);
             }
 
            
