@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_plate: {fileID: 8572201202274145892}
   m_plateColliders:
   - {fileID: 6774126325157272716}
-  m_activationMass: 60
+  m_activationMass: 59.99
   m_activatedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1776,8 +1776,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_stageMoveTime:
-  - 3
+  m_moveFullCycleTime: 3
   m_LinkedDoor: {fileID: 0}
 --- !u!114 &4238570321084951941
 MonoBehaviour:

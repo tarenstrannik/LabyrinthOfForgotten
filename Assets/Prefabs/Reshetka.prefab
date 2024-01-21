@@ -190,6 +190,7 @@ Transform:
   - {fileID: 7739162593734496596}
   - {fileID: 6189142335343953029}
   - {fileID: 5112903209945285901}
+  - {fileID: 8940375589766639162}
   m_Father: {fileID: 5601981076085204594}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2305919063807825279
@@ -801,7 +802,6 @@ Transform:
   - {fileID: 967412018660751814}
   - {fileID: 5264017505708569958}
   - {fileID: 5834943641784431727}
-  - {fileID: 8940375589766639162}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4789732206573795893
@@ -832,6 +832,27 @@ MonoBehaviour:
   - 6
   m_pauseTime: 2
   m_MoveDownTimeSecondStage: 1
+  m_fullyOpenedReachedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_fullyOpenedLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_positionChangeBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_positionChangingEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_startPositionReachedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_intermediatePositionReachedFromMinEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_intermediatePositionReachedFromMaxEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &8811725587041154882
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1074,12 +1095,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4816412012396708607}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5601981076085204594}
+  m_Father: {fileID: 5761102131654415748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7645889135551316846
 AudioSource:

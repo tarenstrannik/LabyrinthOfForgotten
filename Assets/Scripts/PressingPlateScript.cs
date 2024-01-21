@@ -24,6 +24,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
     [SerializeField] private List<Collider> m_plateColliders;
     private Dictionary<GameObject,float> m_currentObjectsOnPlate = new Dictionary<GameObject, float>();
 
+    [Tooltip("Make it a bit less than you really need because of float comparision")]
     [SerializeField] private float m_activationMass = 60f;
     private float m_curMass = 0f; 
 
@@ -50,8 +51,8 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 
     }
 
-    [SerializeField] private UnityEvent<float,float> m_positionChangeBeginEvent;
-    public UnityEvent<float, float> OnPositionChangeBegin
+    [SerializeField] private UnityEvent<float> m_positionChangeBeginEvent;
+    public UnityEvent<float> OnPositionChangeBegin
     {
         get
         {
@@ -82,12 +83,8 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 
     private Coroutine m_MoveplateCoroutine = null;
 
-    private Coroutine m_MoveplateWithDelayCoroutine = null;
-    private Coroutine m_SendCommandWIthDelayCoroutine = null;
-
-    private float m_curTime;
     [Header("Moving stages options")]
-    [SerializeField] private float[] m_stageMoveTime = { 3f};
+    [SerializeField] private float m_moveFullCycleTime = 3f;
 
     [SerializeField] private GameObject m_LinkedDoor;
 
@@ -117,58 +114,18 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
         m_plate.position = m_startTransforms[0].position;
     }
 
-    private void MovePlate(float endTimePercent, float allTime)
+    private void MovePlate(float endTimePercent)
     {
-
-        if (m_MoveplateWithDelayCoroutine != null)
-        {
-            StopCoroutine(m_MoveplateWithDelayCoroutine);
-        }
-        if (m_SendCommandWIthDelayCoroutine != null)
-        {
-            StopCoroutine(m_SendCommandWIthDelayCoroutine);
-        }
-        m_MoveplateWithDelayCoroutine =StartCoroutine(MovePlateWithDelay( endTimePercent, allTime));
-        m_SendCommandWIthDelayCoroutine=StartCoroutine(SendMoveCommandToDoorWithDelay(endTimePercent, allTime));
-    }
-
-    private IEnumerator SendMoveCommandToDoorWithDelay(float endTimePercent, float allTime)
-    {
-        while (m_LinkedDoor.GetComponent<DoorUpScript>().m_IsFalling)
-        { 
-            yield return null;
-        }
-        
-        m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoor(endTimePercent, allTime);
-        m_SendCommandWIthDelayCoroutine = null;
-    }
-
-    private IEnumerator MovePlateWithDelay(float endTimePercent, float allTime)
-    {
-
-        while (m_LinkedDoor.GetComponent<DoorUpScript>().m_IsFalling)
-        {
-            yield return null;
-        }
-        Transform[] objectsToMove = { m_plate };
 
         if (m_MoveplateCoroutine != null)
         {
-            StopMovingPlateCoroutine(m_MoveplateCoroutine);
+            StopCoroutine(m_MoveplateCoroutine);
         }
-        m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, endTimePercent, allTime));
-        m_MoveplateWithDelayCoroutine = null;
-    }
+        Transform[] objectsToMove = { m_plate };
+        m_MoveplateCoroutine = StartCoroutine(IMoveplate(objectsToMove, endTimePercent));
 
-    private void StopMovingPlateCoroutine(Coroutine cor)
-    {
-        if (cor != null)
-        {
-            StopCoroutine(cor);
-            m_LinkedDoor.GetComponent<DoorUpScript>().StopMovingDoorCoroutine();
-        }
     }
-    private IEnumerator IMoveplate(Transform[] objectsToMove, float endTimePercent, float allTime)
+    private IEnumerator IMoveplate(Transform[] objectsToMove, float endTimePercent)
     {
 
 
@@ -178,22 +135,17 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 
         int directionCoef = endTimePercent > m_curPercent ? 1 : -1;
 
-        m_curTime = m_curPercent * allTime;
-
-
-
-        while (directionCoef * m_curTime <= directionCoef * endTimePercent * allTime)
+        while (directionCoef * m_curPercent  <= directionCoef * endTimePercent )
         {
             foreach (var obj in objectsToMove)
             {
 
-                obj.transform.position = Vector3.Lerp(startPosition, endPosition, m_curTime / allTime);
+                obj.transform.position = Vector3.Lerp(startPosition, endPosition, m_curPercent);
             }
-            m_curTime += directionCoef * Time.deltaTime;
-            m_curPercent = m_curTime / allTime;
+            m_curPercent += directionCoef * Time.deltaTime/ m_moveFullCycleTime;
             yield return null;
         }
-        m_curPercent = m_curTime / allTime;
+        m_curPercent = endTimePercent;
         m_curPercent = m_curPercent > 1 ? 1 : m_curPercent;
         m_curPercent = m_curPercent < 0 ? 0 : m_curPercent;
 
@@ -223,9 +175,10 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
                 m_curMass += colRb.mass;
                 if (!m_plateActivated)
                 {
-                    var targetMass = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
-                    //MovePlate(targetMass, m_stageMoveTime[0]);
-                    OnPositionChangeBegin.Invoke(targetMass, m_stageMoveTime[0]);
+                    var targetPercent = m_curMass >= m_activationMass ? 1 : m_curMass / m_activationMass;
+                    //MovePlate(targetMass, m_moveFullCycleTime);
+                    OnPositionChangeBegin.Invoke(targetPercent);
+                    
                 }
 
 
@@ -233,23 +186,6 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 
         }
      }
-    /*
-     private void OnCollisionExit(Collision collision)
-     {
-         if(m_curMass< m_maxMass && m_doorOpened)
-         {
-             m_doorOpened = false;
-             m_plateClickAudioSource.PlayOneShot(m_movingEndedClick);
-             m_curWaitingTimeout = m_doorFallingTimeout;
-             m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
-         }
-         m_currentColliders.Remove(collision.gameObject);
-         var prevMass = m_curMass;
-         m_curMass -= collision.gameObject.GetComponent<Rigidbody>().mass;
-         Moveplate(prevMass / m_maxMass, m_curMass / m_maxMass, m_stageMoveTime[0]);
-     }
-    */
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -268,11 +204,10 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
                 {
                     m_plateActivated = false;
                     OnMaxLeftEvent.Invoke();
-                    m_LinkedDoor.GetComponent<DoorUpScript>().MoveDoorSecondStageDown();
                 }
-                var targetMass = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
-                //MovePlate(targetMass, m_stageMoveTime[0]);
-                OnPositionChangeBegin.Invoke(targetMass, m_stageMoveTime[0]);
+                var targetPercent = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
+                //MovePlate(targetMass, m_moveFullCycleTime);
+                OnPositionChangeBegin.Invoke(targetPercent);
             }
 
            

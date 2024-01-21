@@ -3,14 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
-
-public class DoorUpScript : MonoBehaviour
+using UnityEngine.Events;
+public class DoorUpScript : MonoBehaviour, IHaveMinMax, IMoveLinear
 {
-    [SerializeField] private AudioSource m_doorAudioSource;
-    [SerializeField] private AudioSource m_doorSlamAudioSource;
-    [SerializeField] private AudioClip m_movingEndedSound;
-
-
     [SerializeField] private Transform[] m_startTransforms;
     [SerializeField] private Transform[] m_endTransforms;
 
@@ -18,177 +13,268 @@ public class DoorUpScript : MonoBehaviour
     [SerializeField] GameObject m_pruty;
     [SerializeField] GameObject m_transparentDoor;
 
-    private bool m_isFalling=false;
-    public bool m_IsFalling
+    private Coroutine m_curCoroutine = null;
+
+    [SerializeField] private float[] m_stageMovingUpTime = { 3f, 6f };
+    [SerializeField] private float[] m_stageMovingDownTime = { 3f, 1f };
+    [SerializeField] float m_pauseBetweenStagesUpTime = 3f;
+    [SerializeField] float m_pauseBetweenStagesDownTime = 0f;
+
+    private int m_curStage = 0;
+    private float m_curPercent = 0;
+    private float m_cachedTargetPercent = 0;
+
+    // Events
+    [Header("Events options")]
+
+    [SerializeField] private UnityEvent m_fullyOpenedReachedEvent;
+    public UnityEvent OnMaxReachedEvent
     {
         get
         {
-            return m_isFalling;
+            return m_fullyOpenedReachedEvent;
+        }
+
+    }
+    [SerializeField] private UnityEvent m_fullyOpenedLeftEvent;
+    public UnityEvent OnMaxLeftEvent
+    {
+        get
+        {
+            return m_fullyOpenedLeftEvent;
+        }
+
+    }
+
+    [SerializeField] private UnityEvent<float> m_positionChangeBeginEvent;
+    public UnityEvent<float> OnPositionChangeBegin
+    {
+        get
+        {
+            return m_positionChangeBeginEvent;
+        }
+
+    }
+    [SerializeField] private UnityEvent m_positionChangingEndEvent;
+    public UnityEvent OnPositionChangeEnd
+    {
+        get
+        {
+            return m_positionChangingEndEvent;
         }
     }
 
-    private Coroutine m_MoveDoorCoroutine = null;
-
-
-    private float m_curTime=0;
-    private float m_curPercent=0;
-
-
-    [SerializeField] private float[] m_stageMoveTime = { 3f, 3f };
-    [SerializeField] float m_pauseTime = 3f;
-    [SerializeField] float m_MoveDownTimeSecondStage = 1f;
-
-
-    private float m_startPitch;
-
-    private int m_curStage = 0;
-    private int m_maxStage = 1;
-    private void Awake()
+    [SerializeField] private UnityEvent m_startPositionReachedEvent;
+    public UnityEvent OnMinReachedEvent
     {
-        m_doorAudioSource = GetComponent<AudioSource>();
-        m_pruty.transform.position = m_startTransforms[0].position;
-        m_transparentDoor.transform.position = m_startTransforms[0].position;
-        m_startPitch = m_doorAudioSource.pitch;
-        m_maxStage = m_stageMoveTime.Length - 1;
+        get
+        {
+            return m_startPositionReachedEvent;
+        }
+    }
+
+    [SerializeField] private UnityEvent m_startPositionLeftEvent;
+    public UnityEvent OnMinLeftEvent 
+    {
+        get
+        {
+            return m_startPositionLeftEvent;
+        }
     }
 
 
-
-    public void MoveDoor(float endTimePercent, float allTime)
+    [SerializeField] private UnityEvent m_intermediatePositionReachedFromMinEvent;
+    public UnityEvent OnIntermediateFromMinReachedEvent
     {
+        get
+        {
+            return m_intermediatePositionReachedFromMinEvent;
+        }
+    }
+    
+
+    [SerializeField] private UnityEvent m_intermediateToMinPositionLeftEvent;
+    public UnityEvent OnIntermediateToMinLeftEvent
+    {
+        get
+        {
+            return m_intermediateToMinPositionLeftEvent;
+        }
+    }
 
 
-            m_doorAudioSource.pitch = m_startPitch * allTime / m_stageMoveTime[1];
+    [SerializeField] private UnityEvent m_intermediatePositionReachedFromMaxEvent;
+    public UnityEvent OnIntermediateFromMaxReachedEvent
+    {
+        get
+        {
+            return m_intermediatePositionReachedFromMaxEvent;
+        }
+    }
+
+    [SerializeField] private UnityEvent m_intermediateToMaxPositionLeftEvent;
+    public UnityEvent OnIntermediateToMaxLeftEvent
+    {
+        get
+        {
+            return m_intermediateToMaxPositionLeftEvent;
+        }
+    }
+
+    [SerializeField] private UnityEvent[] m_goingUp;
+    [SerializeField] private UnityEvent[] m_goingDown;
+
+    //----------------
+
+    private void Awake()
+    {
+        m_pruty.transform.position = m_startTransforms[0].position;
+        m_transparentDoor.transform.position = m_startTransforms[0].position;        
+    }
+
+    private void OnEnable()
+    {
+        OnIntermediateFromMinReachedEvent.AddListener(SwitchStageWithDelay);
+        OnIntermediateFromMaxReachedEvent.AddListener(SwitchStageWithDelay);
+    }
+    private void OnDisable()
+    {
+        OnIntermediateFromMinReachedEvent.RemoveListener(SwitchStageWithDelay);
+        OnIntermediateFromMaxReachedEvent.RemoveListener(SwitchStageWithDelay);
+    }
+    public void MoveDoor(float endTimePercent)
+    {
+        if (m_curCoroutine != null) StopCoroutine(m_curCoroutine);
+        float fullStageMovingTime = 0;
+        if (endTimePercent >= m_curPercent)
+        {
+            m_goingUp[m_curStage].Invoke();
+            fullStageMovingTime = m_stageMovingUpTime[m_curStage];
+        }
+        else
+        {
+            m_goingDown[m_curStage].Invoke();
+            fullStageMovingTime = m_stageMovingDownTime[m_curStage];
+        }
         GameObject[] objectsToMove;
-            if (m_curStage==0)
+        float targetPercent = 0f;
+        if (m_curStage==0)
         {
             GameObject[] obj = { m_pruty };
             objectsToMove = obj;
+
+            if(m_curPercent==0)
+            {
+                OnMinLeftEvent.Invoke();
+            }
+            else if (m_curPercent == 1)
+            {
+                OnIntermediateToMinLeftEvent.Invoke();
+            }
+
+            targetPercent = endTimePercent;
         }
         else
         {
             GameObject[] obj = { m_pruty, m_transparentDoor };
             objectsToMove = obj;
-
-        }
-        
-            if (m_MoveDoorCoroutine != null)
+            if (m_curPercent == 0)
             {
-                StopMovingDoorCoroutine();
+                OnIntermediateToMaxLeftEvent.Invoke();
             }
-            m_MoveDoorCoroutine = StartCoroutine(IMoveDoor(objectsToMove, endTimePercent, allTime));
-
-    }
-    public void MoveDoorSecondStageDown()
-    {
-        if (m_curStage == 1)
-        {
-            m_transparentDoor.transform.position= m_startTransforms[0].position;
-            m_doorAudioSource.pitch = m_startPitch * m_stageMoveTime[1] / m_MoveDownTimeSecondStage;
-
-            GameObject[] obj = { m_pruty }; //GameObject[] obj = { m_pruty, m_transparentDoor };
-            GameObject[] objectsToMove = obj;
-            
-
-            if (m_MoveDoorCoroutine != null)
+            else if (m_curPercent == 1)
             {
-                StopMovingDoorCoroutine();
+                OnMaxLeftEvent.Invoke();
             }
-            m_MoveDoorCoroutine = StartCoroutine(IMoveDoor(objectsToMove, 0, m_MoveDownTimeSecondStage));
+            if(endTimePercent==1)
+            {
+                targetPercent = endTimePercent;
+            }
+            else
+            {
+                m_cachedTargetPercent = endTimePercent;
+                targetPercent = 0;
+            }
         }
-    }
-    public void StopMovingDoorCoroutine()
-    {
-        if (m_MoveDoorCoroutine != null)
-        {
-            StopCoroutine(m_MoveDoorCoroutine);
-            m_doorAudioSource.Pause();
-            m_MoveDoorCoroutine = null;
-            m_isFalling = false;
-        }
+
+        m_curCoroutine = StartCoroutine(IMoveDoor(objectsToMove, targetPercent, fullStageMovingTime));
+
+        OnPositionChangeBegin.Invoke(endTimePercent);
+
     }
     private IEnumerator IMoveDoor(GameObject[] objectsToMove, float endTimePercent, float allTime)
     {
-        if(endTimePercent < m_curPercent && m_curStage==1)
-        {
-            m_isFalling = true;
-        }
-
         Vector3 startPosition = m_startTransforms[m_curStage].position;
         Vector3 endPosition = m_endTransforms[m_curStage].position;
 
 
         int directionCoef = endTimePercent > m_curPercent ? 1 : -1;
-
-        m_curTime = m_curPercent * allTime;
-
-        m_doorAudioSource.Play();
-
-        while (directionCoef * m_curTime <= directionCoef * endTimePercent * allTime)
+        
+        while (directionCoef * m_curPercent <= directionCoef * endTimePercent)
         {
             foreach (var obj in objectsToMove)
             {
 
-                obj.transform.position = Vector3.Lerp(startPosition, endPosition, m_curTime / allTime);
+                obj.transform.position = Vector3.Lerp(startPosition, endPosition, m_curPercent);
             }
-            
-            m_curTime += directionCoef * Time.deltaTime;
-            
-            m_curPercent = m_curTime / allTime;
+            m_curPercent += directionCoef * Time.deltaTime / allTime;
             yield return null;
         }
-        m_curPercent = m_curTime / allTime;
+
+        m_curPercent = endTimePercent;
         m_curPercent = m_curPercent > 1 ? 1 : m_curPercent;
         m_curPercent = m_curPercent < 0 ? 0 : m_curPercent;
-        m_doorAudioSource.Pause();
-        if (m_curPercent <= 0 || m_curPercent >= 1)
+
+        OnPositionChangeEnd.Invoke();
+        if (m_curStage == 0)
         {
-            m_doorSlamAudioSource.PlayOneShot(m_movingEndedSound);
-        }     
-        
-        if (m_curTime / allTime >= 1 && m_curStage==0)
-        {
-            var curPause = m_pauseTime;
-            while(curPause >= 0)
+            if (m_curPercent <= 0)
             {
-                curPause -= Time.deltaTime;
-                yield return null;
+                OnMinReachedEvent.Invoke();
             }
-            //yield return new WaitForSeconds(m_pauseTime);
+            else if (m_curPercent >= 1)
+            {
+                OnIntermediateFromMinReachedEvent.Invoke();
+            }
+        }
+        else if (m_curStage == 1)
+        {
+            if (m_curPercent <= 0)
+            {
+                OnIntermediateFromMaxReachedEvent.Invoke();
+            }
+            else if (m_curPercent >= 1)
+            {
+                OnMaxReachedEvent.Invoke();
+            }
+        }
+    }
+
+    private void SwitchStageWithDelay()
+    {
+        m_curCoroutine=StartCoroutine(ISwitchStageWithDelay());
+    }
+    private IEnumerator ISwitchStageWithDelay()
+    {
+        if (m_curStage == 0)
+        {
+            
+            yield return new WaitForSeconds(m_pauseBetweenStagesUpTime);
             m_curStage = 1;
             m_curPercent = 0;
-            m_MoveDoorCoroutine = null;
-            MoveDoorSecondStageUp();
+            MoveDoor(1);
         }
-        else if (m_curTime / allTime<=0 && m_curStage ==1)
+        else
         {
+            yield return new WaitForSeconds(m_pauseBetweenStagesDownTime);
             m_curStage = 0;
-            //m_transparentDoor.transform.position= m_startTransforms[0].position;
             m_curPercent = 1;
-            m_isFalling = false;
-            m_MoveDoorCoroutine = null;
+            MoveDoor(m_cachedTargetPercent);
         }
-        
+        m_transparentDoor.transform.position = m_startTransforms[m_curStage].position;
     }
-    /*--------------------for handle--------------*/
-    public void MoveDoorFullFirstStage()
-    {
-        
-        MoveDoor(1, m_stageMoveTime[m_curStage]);
-
-        
-    }
-  
-    public void MoveDoorSecondStageUp()
-    {
-        
-        GameObject[] obj = { m_pruty, m_transparentDoor };
-        m_doorAudioSource.pitch = m_startPitch;
-
-        m_MoveDoorCoroutine = StartCoroutine(IMoveDoor(obj, 1, m_stageMoveTime[m_curStage] * (1 - m_curPercent)));
-    }
-
     
+
 
      
 }

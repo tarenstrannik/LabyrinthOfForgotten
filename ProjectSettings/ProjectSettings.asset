@@ -158,7 +158,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.BeaverDrummer.LabyrinthOfForgotten
-    Standalone: com.Unity-Technologies.com.unity.template.urp-blank
+    Standalone: com.Beaver-Drummer.LabyrinthOfForgotten
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
     Standalone: 0

@@ -124,8 +124,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2028090516369151397}
   - component: {fileID: 7454631035111594935}
-  - component: {fileID: 5580569713343320544}
-  - component: {fileID: 7842002862306852659}
+  - component: {fileID: 3319604247225447831}
+  - component: {fileID: 5810056941961412782}
   m_Layer: 7
   m_Name: HandleObject
   m_TagString: Untagged
@@ -247,7 +247,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5580569713343320544
+--- !u!114 &3319604247225447831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,13 +256,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 3663523640751186117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0755a2ba17a31d643b4a27e3034d8a79, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f0d6e8e27573ee4eaa003261cc9aca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 85d2f1dcfa8493143b47511497e87d0f, type: 3}
-  volume: 1
-  randomPitchVariance: 0
---- !u!114 &7842002862306852659
+  m_activatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5810056941961412782}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: PlaySoundAtIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_deactivatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5810056941961412782}
+        m_TargetAssemblyTypeName: PlayAudio, Assembly-CSharp
+        m_MethodName: PlaySoundAtIndex
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_positionChangeBeginEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_positionChangingEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_startPositionReachedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5810056941961412782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -271,10 +307,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3663523640751186117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf5da90e23dfb1498c319c855217e48, type: 3}
+  m_Script: {fileID: 11500000, guid: c0f40ae545b416c4b89431e10992c186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_linkedDoor: {fileID: 0}
+  m_audioSource: {fileID: 7454631035111594935}
+  m_clips:
+  - {fileID: 8300000, guid: 85d2f1dcfa8493143b47511497e87d0f, type: 3}
 --- !u!1 &5226923581880203072
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,46 +400,10 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7842002862306852659}
-        m_TargetAssemblyTypeName: OpenDoorByHandle, Assembly-CSharp
-        m_MethodName: OpenDoor
+      - m_Target: {fileID: 3319604247225447831}
+        m_TargetAssemblyTypeName: Handle, Assembly-CSharp
+        m_MethodName: Activate
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5580569713343320544}
-        m_TargetAssemblyTypeName: PlayQuickSound, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 685121887607397186}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 51105367861839486}
-        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
-        m_MethodName: set_isKinematic
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -412,7 +414,19 @@ MonoBehaviour:
         m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3319604247225447831}
+        m_TargetAssemblyTypeName: Handle, Assembly-CSharp
+        m_MethodName: Dectivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_OnHoverEntered:
@@ -738,7 +752,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -0.025333123, z: 0.26000318}
+  m_ConnectedAnchor: {x: 0, y: 0.002996561, z: 0.22982424}
   serializedVersion: 2
   m_UseSpring: 1
   m_Spring:
