@@ -148,9 +148,9 @@ MonoBehaviour:
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DoorUnlocking, Assembly-CSharp
-        m_MethodName: UnlockDoor
+      - m_Target: {fileID: 6553010206281018403}
+        m_TargetAssemblyTypeName: KeyHole, Assembly-CSharp
+        m_MethodName: Activate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -160,9 +160,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DoorUnlocking, Assembly-CSharp
-        m_MethodName: UnlockDoor
+  m_SelectExited:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6553010206281018403}
+        m_TargetAssemblyTypeName: KeyHole, Assembly-CSharp
+        m_MethodName: Dectivate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -170,23 +173,8 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  m_SelectExited:
-    m_PersistentCalls:
-      m_Calls: []
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_OnHoverEntered:
@@ -1652,6 +1640,7 @@ GameObject:
   - component: {fileID: 5968261006037918990}
   - component: {fileID: 1442097137113796283}
   - component: {fileID: 9104102668641405678}
+  - component: {fileID: 6553010206281018403}
   m_Layer: 7
   m_Name: KeyHole
   m_TagString: Untagged
@@ -1712,3 +1701,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_objectMaterial: 3
+--- !u!114 &6553010206281018403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8365834276951701871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a05aedd19a57849a78624a2def59f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_activatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_deactivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []

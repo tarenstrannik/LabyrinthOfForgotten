@@ -157,6 +157,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 0
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 0
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!1 &1324741009698662225
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +405,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 0
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 0
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!1 &1621723558742284141
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +669,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 0
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 0
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!1 &1775717122760998777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1467,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 0
   m_defaultCollisionLayer: 0
   m_defaultFireCollisionLayer: 0
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!1 &3028658594690670102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,7 +1584,6 @@ Transform:
   m_Children:
   - {fileID: 8908870278291489137}
   - {fileID: 789793917155340069}
-  - {fileID: 6561404157018304318}
   - {fileID: 6338509387976959452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2368,6 +2375,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 20
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!114 &4858752615512634086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2714,6 +2723,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 0
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 0
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!1 &7741563793602702629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2898,6 +2909,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 20
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!114 &9027698372061943963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3555,90 +3568,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &44325297600419117
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 502758314443150271}
-    m_Modifications:
-    - target: {fileID: 6598815579406187026, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_Name
-      value: XR Device Simulator
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9f5a24a380916d14db9775daab4fe333, type: 3}
---- !u!4 &6561404157018304318 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6598815579406187027, guid: 9f5a24a380916d14db9775daab4fe333,
-    type: 3}
-  m_PrefabInstance: {fileID: 44325297600419117}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &49013355402310134
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4313,6 +4242,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 19
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!114 &8654163369743926876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4729,6 +4660,8 @@ MonoBehaviour:
   m_collisionLayerToExcludeBodyIfFiringTorch: 19
   m_defaultCollisionLayer: 12
   m_defaultFireCollisionLayer: 18
+  m_changingDelay: 0.5
+  m_changingBackDelay: 0.5
 --- !u!114 &5423510691946870186
 MonoBehaviour:
   m_ObjectHideFlags: 0

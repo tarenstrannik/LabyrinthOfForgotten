@@ -14,8 +14,8 @@ public class DoorUnlocking : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        m_doorRb = GetComponent<Rigidbody>();
-        m_doorAnimator = GetComponent<Animator>();
+        m_doorRb = GetComponentInChildren<Rigidbody>();
+        m_doorAnimator = GetComponentInChildren<Animator>();
 
         var openTime = m_doorAudio.clip.length;
         

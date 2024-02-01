@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorRight Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2077454661420975597, guid: 9a2ca213b62bb994b8bc38ad26aa0620,
+        type: 3}
+      propertyPath: m_isLeft
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2590498802225759353, guid: 9a2ca213b62bb994b8bc38ad26aa0620,
         type: 3}
       propertyPath: m_Axis.y

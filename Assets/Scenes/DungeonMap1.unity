@@ -18933,7 +18933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &516454443 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 615216653750252872, guid: 7fcfd924d16047d44b53185623a9ea0f,
+  m_CorrespondingSourceObject: {fileID: 2151761097438709251, guid: 7fcfd924d16047d44b53185623a9ea0f,
     type: 3}
   m_PrefabInstance: {fileID: 516454441}
   m_PrefabAsset: {fileID: 0}
@@ -22468,7 +22468,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-10122
+  m_Name: pb_Mesh-6116
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -23925,18 +23925,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2826456760821401564}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &894665787 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 685036536866862758, guid: 9a2ca213b62bb994b8bc38ad26aa0620,
-    type: 3}
-  m_PrefabInstance: {fileID: 974567284}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77330ae499544a94c8c7964e8f090b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &900262805
 GameObject:
   m_ObjectHideFlags: 0
@@ -24401,6 +24389,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 974567284}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &974567286 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2077454661420975597, guid: 9a2ca213b62bb994b8bc38ad26aa0620,
+    type: 3}
+  m_PrefabInstance: {fileID: 974567284}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77330ae499544a94c8c7964e8f090b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &993004216
 Mesh:
   m_ObjectHideFlags: 0
@@ -56814,7 +56814,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37814
+  m_Name: pb_Mesh32672
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -59384,7 +59384,7 @@ PrefabInstance:
     - target: {fileID: 1296706625022320789, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 438
+      value: 462
       objectReference: {fileID: 0}
     - target: {fileID: 1312823602124246882, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
@@ -59611,6 +59611,106 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 787910148}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 974567286}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 516454443}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1510940823}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnlockDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: UnlockDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DoorUnlocking, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: DoorUnlocking, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
+        type: 3}
+      propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6612209416614225745, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_Mesh
@@ -59705,12 +59805,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 894665787}
+      objectReference: {fileID: 0}
     - target: {fileID: 9096194854207472355, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 516454443}
+      objectReference: {fileID: 0}
     - target: {fileID: 9096194854207472355, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_Target
