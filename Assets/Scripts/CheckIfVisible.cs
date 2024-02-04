@@ -5,13 +5,13 @@ using UnityEngine;
 public class CheckIfVisible : MonoBehaviour
 {
 
-    [SerializeField] private IgniteFire m_igniteFire;
+    [SerializeField] private FireController m_fireController;
     private Light m_fireLight;
     [SerializeField] private int m_invisibleRendererLayer = 22;
     private void Awake()
     {
-        m_fireLight = m_igniteFire.FireLight;
-        var visDistance = m_igniteFire.FireLight.range;
+        m_fireLight = m_fireController.FireLight;
+        var visDistance = m_fireController.FireLight.range;
 
         transform.localScale = new Vector3(visDistance, visDistance, visDistance);
         
@@ -31,7 +31,7 @@ public class CheckIfVisible : MonoBehaviour
     private void OnBecameVisible()
     {
 
-        if (!m_igniteFire.IsFireStopped) m_fireLight.enabled = true;
+        if (m_fireController.IsActive) m_fireLight.enabled = true;
 
     }
 

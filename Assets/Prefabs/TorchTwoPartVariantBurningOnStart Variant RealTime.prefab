@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 50490496520001112, guid: 5d55b2475389f3044824f9e72c02eab4,
+        type: 3}
+      propertyPath: m_isFireActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 726667280163554578, guid: 5d55b2475389f3044824f9e72c02eab4,
         type: 3}
       propertyPath: m_Layer
@@ -16,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 726667280163554582, guid: 5d55b2475389f3044824f9e72c02eab4,
         type: 3}
       propertyPath: playOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1518887549296514718, guid: 5d55b2475389f3044824f9e72c02eab4,
         type: 3}
@@ -131,7 +136,7 @@ PrefabInstance:
     - target: {fileID: 8181916632242866992, guid: 5d55b2475389f3044824f9e72c02eab4,
         type: 3}
       propertyPath: m_PlayOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8436130978783295329, guid: 5d55b2475389f3044824f9e72c02eab4,
         type: 3}

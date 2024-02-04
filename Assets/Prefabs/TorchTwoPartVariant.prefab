@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ffe233d75368d4d8095aea05011a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_igniteFire: {fileID: 6627555979012271900}
+  m_fireController: {fileID: 50490496520001112}
   m_invisibleRendererLayer: 22
 --- !u!1 &1840620362047611373
 GameObject:
@@ -115,8 +115,8 @@ GameObject:
   - component: {fileID: 588459530022321849}
   - component: {fileID: 2141120006690281899}
   - component: {fileID: 1564697422926620637}
-  - component: {fileID: 3538836464681541441}
   - component: {fileID: 6724793138601036889}
+  - component: {fileID: 50490496520001112}
   m_Layer: 12
   m_Name: TorchTwoPartVariant
   m_TagString: Torch
@@ -224,58 +224,10 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3538836464681541441}
-        m_TargetAssemblyTypeName: SaveLinkOnControllerSelectedObject, Assembly-CSharp
-        m_MethodName: SaveLinkToController
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8976118988756972578}
-        m_TargetAssemblyTypeName: ToggleSimulationOnPlayerSelect, Assembly-CSharp
-        m_MethodName: ChangeCullingMode
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3538836464681541441}
-        m_TargetAssemblyTypeName: SaveLinkOnControllerSelectedObject, Assembly-CSharp
-        m_MethodName: ClearLinkToController
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8976118988756972578}
-        m_TargetAssemblyTypeName: ToggleSimulationOnPlayerSelect, Assembly-CSharp
-        m_MethodName: RestoreCullingMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -419,8 +371,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fire: {fileID: 726667280163554582}
-  m_player: {fileID: 0}
-  m_PlayerTag: Player
+  m_onByPlayerSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onByPlayerDeselected:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6853395708650446245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AudioSource: {fileID: 4524249340892581150}
-  m_MaxSoundVelocity: 3
+  m_maxSoundVelocity: 5
   m_repeatCollisionDelay: 0.5
 --- !u!114 &588459530022321849
 MonoBehaviour:
@@ -491,20 +447,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1, y: 0.3, z: 0.1}
   m_Center: {x: 0, y: 0.25, z: 0}
---- !u!114 &3538836464681541441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840620362047611373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57411404a8e81764cbd25fc2ae6bed8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlayerTag: Player
-  m_player: {fileID: 0}
 --- !u!114 &6724793138601036889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +459,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c2fb777c0663b44b0e8135cecfe5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &50490496520001112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840620362047611373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18cc8c74213588343a68fbcc1d20c584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fireParticles: {fileID: 726667280163554582}
+  m_currentFlameCollider: {fileID: 2050738020544254122}
+  m_smokeParticles: {fileID: 7449337625164643143}
+  m_fireAudio: {fileID: 8181916632242866992}
+  m_fireOneShotAudio: {fileID: 4524249340892581150}
+  m_fireFadingAudioClip: {fileID: 8300000, guid: 8e2d18aa5bd4eaf4d86083113d030460,
+    type: 3}
+  m_fireLight: {fileID: 4382151601499427662}
+  m_fireRugRenderer: {fileID: 8436130978783295329}
+  m_firingRugMaterial: {fileID: 2100000, guid: f5bab49dd303cbd459c88a95b7fa25f2, type: 2}
+  m_noFiringRugMaterial: {fileID: 2100000, guid: 83814ea2a7dbd2d488d711b9e48a2b61,
+    type: 2}
+  m_collisionLayerInLeftHand: 14
+  m_collisionLayerInRightHand: 15
+  m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand: 19
+  m_collisionLayerToExcludeBodyIfFiringTorchInRightHand: 20
+  m_collisionLayerInLeftRayHand: 26
+  m_collisionLayerInRightRayHand: 25
+  m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand: 28
+  m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand: 27
+  m_collisionLayerToExcludeBodyIfInBackpack: 16
+  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 21
+  m_defaultCollisionLayer: 12
+  m_defaultFireCollisionLayer: 18
+  m_isFireActive: 0
+  m_fireParticlesTag: FireFlame
+  m_waterTag: Water
+  m_onFireUp:
+    m_PersistentCalls:
+      m_Calls: []
+  m_onFadeOff:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1872611543995510299
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,9 +599,9 @@ GameObject:
   - component: {fileID: 5628012712124308250}
   - component: {fileID: 8436130978783295329}
   - component: {fileID: 2627021392185780203}
-  - component: {fileID: 6627555979012271900}
   - component: {fileID: 2921285195360734053}
   - component: {fileID: 744899556709260447}
+  - component: {fileID: 3851681159825636736}
   m_Layer: 12
   m_Name: TorchRug
   m_TagString: Torch
@@ -708,42 +695,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.01, y: 1.01, z: 1.01}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6627555979012271900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2435761724779183498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18cc8c74213588343a68fbcc1d20c584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Fire: {fileID: 726667280163554582}
-  m_currentFlameCollider: {fileID: 2050738020544254122}
-  m_Smoke: {fileID: 7449337625164643143}
-  m_fireAudio: {fileID: 8181916632242866992}
-  m_fireOneShotAudio: {fileID: 4524249340892581150}
-  m_fireFadingAudio: {fileID: 8300000, guid: 8e2d18aa5bd4eaf4d86083113d030460, type: 3}
-  m_fireLight: {fileID: 4382151601499427662}
-  m_FireRug: {fileID: 8436130978783295329}
-  m_firing: {fileID: 2100000, guid: f5bab49dd303cbd459c88a95b7fa25f2, type: 2}
-  m_noFiring: {fileID: 2100000, guid: 83814ea2a7dbd2d488d711b9e48a2b61, type: 2}
-  m_collisionLayerInLeftHand: 14
-  m_collisionLayerInRightHand: 15
-  m_collisionLayerToExcludeBodyIfFiringTorchInLeftHand: 19
-  m_collisionLayerToExcludeBodyIfFiringTorchInRightHand: 20
-  m_collisionLayerInLeftRayHand: 26
-  m_collisionLayerInRightRayHand: 25
-  m_collisionLayerToExcludeBodyIfFiringTorchInLeftRayHand: 28
-  m_collisionLayerToExcludeBodyIfFiringTorchInRightRayHand: 27
-  m_collisionLayerToExcludeBodyIfInBackpack: 16
-  m_collisionLayerToExcludeBodyIfFiringTorchInBackpack: 21
-  m_defaultCollisionLayer: 12
-  m_defaultFireCollisionLayer: 18
-  m_torchTag: Torch
-  m_controllerSaver: {fileID: 3538836464681541441}
 --- !u!54 &2921285195360734053
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -786,6 +737,19 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &3851681159825636736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2435761724779183498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c89f606f8721b4893fd1b5f6e910ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_fireController: {fileID: 50490496520001112}
 --- !u!1 &2789698741371259518
 GameObject:
   m_ObjectHideFlags: 0

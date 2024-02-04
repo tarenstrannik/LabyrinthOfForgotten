@@ -7,7 +7,10 @@ public class OnTriggerEnterSecond : DetectOnTriggerEnter
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        m_parentScript.TurnOffWaterCollider();
+        if (other.gameObject.layer == m_playerTeleportHandToFollowLayer)
+        {
+            m_parentScript.TurnOffWaterCollider();
+        }
     }
 
     protected override void OnTriggerExit(Collider other)

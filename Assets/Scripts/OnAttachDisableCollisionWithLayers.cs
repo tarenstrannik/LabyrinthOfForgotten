@@ -23,7 +23,8 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
         if (args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>() != null)
         {
 
-            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>() != null 
+                && args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>().IsActive)
             {
                 args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>().SetCollisionLevel(m_collisionLayerToExcludeBodyIfFiringTorch, 0);
             }
@@ -38,7 +39,8 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
     {
         if (args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>() != null)
         {
-            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>() != null 
+                && args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>().IsActive)
             {
                 args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>().SetCollisionLevel(m_defaultFireCollisionLayer, 0);
             }
@@ -53,7 +55,8 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
     {
         if (args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>() != null)
         {
-            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>() != null 
+                && args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>().IsActive)
             {
                 args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>().SetCollisionLevel(m_collisionLayerToExcludeBodyIfFiringTorch, m_changingDelay);
             }
@@ -68,7 +71,8 @@ public class OnAttachDisableCollisionWithLayers : MonoBehaviour
     {
         if (args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>() != null)
         {
-            if (args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>() != null && !args.interactableObject.transform.gameObject.GetComponentInChildren<IgniteFire>().IsFireStopped)
+            if (args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>() != null 
+                && args.interactableObject.transform.gameObject.GetComponentInChildren<ICanBlockTeleportIfActiveAndInHand>().IsActive)
             {
                 args.interactableObject.transform.gameObject.GetComponent<ChangeCollisionLevel>().SetCollisionLevel(m_defaultFireCollisionLayer, m_changingBackDelay);
             }

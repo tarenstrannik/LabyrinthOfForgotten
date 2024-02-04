@@ -10,6 +10,7 @@ TagManager:
   - StaticInteractable
   - Torch
   - Backpack
+  - WaterNoTeleportCollider
   layers:
   - Default
   - TransparentFX

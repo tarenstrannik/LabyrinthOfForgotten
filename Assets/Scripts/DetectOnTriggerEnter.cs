@@ -6,6 +6,7 @@ public class DetectOnTriggerEnter : MonoBehaviour
 {
     [SerializeField] protected ToggleWaterfallColliderTemporaly m_parentScript;
     [SerializeField] protected int m_playerTeleportHandLayer=11;
+    [SerializeField] protected int m_playerTeleportHandToFollowLayer = 9;
     protected virtual void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer== m_playerTeleportHandLayer)

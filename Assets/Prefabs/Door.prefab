@@ -540,7 +540,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_isLeft: 1
   m_doorAudio: {fileID: 2189497505261915386}
-  m_handles: []
+  m_handles:
+  - {fileID: 2005395278879501813}
+  - {fileID: 5651384430040194237}
 --- !u!1 &2918718776458285266
 GameObject:
   m_ObjectHideFlags: 0

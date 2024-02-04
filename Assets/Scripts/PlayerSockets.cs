@@ -7,8 +7,8 @@ public class PlayerSockets : MonoBehaviour
 {
     [SerializeField] private XRSocketInteractor[] m_playerSockets;
 
-    public List<GameObject> m_playerFiringTorches= new List<GameObject>();
-    public List<GameObject> m_playerAllTorches = new List<GameObject>();
+    public List<GameObject> PlayerFiringTorches= new List<GameObject>();
+    public List<GameObject> PlayerAllTorches = new List<GameObject>();
     public XRSocketInteractor[] PlSockets
     {
         get

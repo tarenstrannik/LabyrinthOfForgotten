@@ -7,7 +7,6 @@ public class ChangePlaySoundDependingOnAngularVelocity : MonoBehaviour
     [SerializeField] private AudioSource m_doorAudioSource;
     // Start is called before the first frame update
 
-    private float m_startPitch;
     private float m_startVolume;
 
     private Rigidbody m_doorRb;
@@ -17,7 +16,6 @@ public class ChangePlaySoundDependingOnAngularVelocity : MonoBehaviour
 
     public void Awake()
     {
-        //m_startPitch = m_doorAudioSource.pitch;
         m_startVolume = m_doorAudioSource.volume;
         m_doorRb = GetComponent<Rigidbody>();
     }
@@ -42,7 +40,6 @@ public class ChangePlaySoundDependingOnAngularVelocity : MonoBehaviour
         {
             float volumeScale = (m_doorRb.angularVelocity.magnitude / m_maxAngularVelocity) <= 1 ? (m_doorRb.angularVelocity.magnitude / m_maxAngularVelocity) : 1;
             m_doorAudioSource.volume = m_startVolume * volumeScale;
-            //m_doorAudioSource.pitch = (m_doorRb.angularVelocity.magnitude / m_maxAngularVelocity) * m_startPitch;
 
             yield return null;
         }
