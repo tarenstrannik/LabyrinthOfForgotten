@@ -30,6 +30,18 @@ public class DoorUnlocking : MonoBehaviour
         if (m_isLocked)
         {
             m_isLocked = false;
+            m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationY;
+            m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationX;
+            m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationZ;
+
+        }
+    }
+    public void UnlockAndOpenDoor()
+    {
+
+        if (m_isLocked)
+        {
+            m_isLocked = false;
             m_doorAnimator.enabled = true;
             m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationY;
             m_doorRb.constraints -= RigidbodyConstraints.FreezeRotationX;
@@ -48,10 +60,6 @@ public class DoorUnlocking : MonoBehaviour
         }
 
         m_doorAnimator.SetBool("b_IsClosed", false);
-        foreach (var handle in m_handles)
-        {
-            handle.GetComponent<XRGrabInteractable>().enabled = true;
-        }
         m_doorAnimator.enabled = false;
     }
 }

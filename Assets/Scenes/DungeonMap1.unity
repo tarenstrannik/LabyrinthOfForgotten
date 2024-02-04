@@ -21140,7 +21140,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh314462
+  m_Name: pb_Mesh332838
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -58664,12 +58664,12 @@ PrefabInstance:
     - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: UnlockDoor
+      value: UnlockAndOpenDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
       propertyPath: m_activatedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: UnlockDoor
+      value: UnlockAndOpenDoor
       objectReference: {fileID: 0}
     - target: {fileID: 6553010206281018403, guid: b621e530b9e39fc4ca517833b85ecce4,
         type: 3}
