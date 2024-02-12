@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.Events;
-public class DoorUpScript : MonoBehaviour, IHaveMinMax, IMoveLinear
+public class DoorUpScript : MonoBehaviour, IHaveMinMax, IMoveLinearToTargetPercent
 {
     [SerializeField] private Transform[] m_startTransforms;
     [SerializeField] private Transform[] m_endTransforms;
@@ -47,7 +47,7 @@ public class DoorUpScript : MonoBehaviour, IHaveMinMax, IMoveLinear
     }
 
     [SerializeField] private UnityEvent<float> m_positionChangeBeginEvent;
-    public UnityEvent<float> OnPositionChangeBegin
+    public UnityEvent<float> OnPositionChangeToTargetPercentBegin
     {
         get
         {
@@ -199,7 +199,7 @@ public class DoorUpScript : MonoBehaviour, IHaveMinMax, IMoveLinear
 
         m_curCoroutine = StartCoroutine(IMoveDoor(objectsToMove, targetPercent, fullStageMovingTime));
 
-        OnPositionChangeBegin.Invoke(endTimePercent);
+        OnPositionChangeToTargetPercentBegin.Invoke(endTimePercent);
 
     }
     private IEnumerator IMoveDoor(GameObject[] objectsToMove, float endTimePercent, float allTime)

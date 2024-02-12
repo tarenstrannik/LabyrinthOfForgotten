@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Handle : MonoBehaviour, IHaveMinMax, IMoveLinear
+public class Handle : MonoBehaviour, IHaveMinMax
 {
     // Events
     [Header("Events options")]
@@ -27,23 +27,6 @@ public class Handle : MonoBehaviour, IHaveMinMax, IMoveLinear
 
     }
 
-    [SerializeField] private UnityEvent<float> m_positionChangeBeginEvent;
-    public UnityEvent<float> OnPositionChangeBegin
-    {
-        get
-        {
-            return m_positionChangeBeginEvent;
-        }
-
-    }
-    [SerializeField] private UnityEvent m_positionChangingEndEvent;
-    public UnityEvent OnPositionChangeEnd
-    {
-        get
-        {
-            return m_positionChangingEndEvent;
-        }
-    }
 
     [SerializeField] private UnityEvent m_startPositionReachedEvent;
     public UnityEvent OnMinReachedEvent
@@ -53,8 +36,14 @@ public class Handle : MonoBehaviour, IHaveMinMax, IMoveLinear
             return m_startPositionReachedEvent;
         }
     }
-    public UnityEvent OnMinLeftEvent { get; }
-
+    [SerializeField] private UnityEvent m_startPositionLeftEvent;
+    public UnityEvent OnMinLeftEvent
+    {
+        get
+        {
+            return m_startPositionLeftEvent;
+        }
+    }
 
     public void Activate()
     {

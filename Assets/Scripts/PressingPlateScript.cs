@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
+public class PressingPlateScript : MonoBehaviour, IMoveLinearToTargetPercent, IHaveMinMax
 {
     //moving options
     [SerializeField] private Transform[] m_startTransforms;
@@ -52,7 +52,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
     }
 
     [SerializeField] private UnityEvent<float> m_positionChangeBeginEvent;
-    public UnityEvent<float> OnPositionChangeBegin
+    public UnityEvent<float> OnPositionChangeToTargetPercentBegin
     {
         get
         {
@@ -95,7 +95,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
 
     private void OnEnable()
     {
-        OnPositionChangeBegin.AddListener(MovePlate);
+        OnPositionChangeToTargetPercentBegin.AddListener(MovePlate);
         m_collisionDetector.OnCollisionEnterDetection += OnCollisionEnter;
         m_collisionDetector.OnTriggerExitDetection += OnTriggerExit;
 
@@ -103,7 +103,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
     private void OnDisable()
     {
         
-        OnPositionChangeBegin.RemoveListener(MovePlate);
+        OnPositionChangeToTargetPercentBegin.RemoveListener(MovePlate);
         m_collisionDetector.OnCollisionEnterDetection -= OnCollisionEnter;
         m_collisionDetector.OnTriggerExitDetection -= OnTriggerExit;
     }
@@ -177,7 +177,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
                 {
                     var targetPercent = m_curMass >= m_activationMass ? 1 : m_curMass / m_activationMass;
                     //MovePlate(targetMass, m_moveFullCycleTime);
-                    OnPositionChangeBegin.Invoke(targetPercent);
+                    OnPositionChangeToTargetPercentBegin.Invoke(targetPercent);
                     
                 }
 
@@ -207,7 +207,7 @@ public class PressingPlateScript : MonoBehaviour, IMoveLinear, IHaveMinMax
                 }
                 var targetPercent = m_curMass > m_activationMass ? 1 : m_curMass / m_activationMass;
                 //MovePlate(targetMass, m_moveFullCycleTime);
-                OnPositionChangeBegin.Invoke(targetPercent);
+                OnPositionChangeToTargetPercentBegin.Invoke(targetPercent);
             }
 
            
