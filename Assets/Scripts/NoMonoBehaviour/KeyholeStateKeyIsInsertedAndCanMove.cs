@@ -7,7 +7,7 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
 {
     public void Enter()
     {
-        // code that runs when we first enter the state
+        Debug.Log("Enter second state");
     }
     public void Process()
     {

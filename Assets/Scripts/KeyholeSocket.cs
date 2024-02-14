@@ -11,12 +11,34 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     [Header("KeyHole options")]
     private StateMachine m_keyholeStateMachine;
     [SerializeField] private Transform m_attachedPosition;
+    public Transform AttachedPosition
+    {
+        get
+        {
+            return m_attachedPosition;
+        }
+        set
+        {
+            m_attachedPosition = AttachedPosition;
+        }
+    }
+    [SerializeField] private Transform _testPosition;
+    [SerializeField] private float _testDistance;
+    [SerializeField] private float _testDot;
+    [SerializeField] private float _testAngle;
+
+    [SerializeField] private float m_minDotToBeAlignedForward = 0.96f;
+    [SerializeField] private float m_eulerAngleToBeAlignedRotation = 15f;
+    [SerializeField] private float m_distanceToRemoveKey = 0.07f;
+    [SerializeField] private float m_distanceToStartRotating = 0.01f;
+    [SerializeField] private float m_eulerAngleTillNoRemoveKey = 15f;
 
 
     [SerializeField] private float m_minDistanceToSocket = 0.1f;
     
 
-    private GameObject m_key;
+    public GameObject Key { get; private set; }
+
     private XRGrabInteractable m_keyGrabInteractable;
     private bool m_keyInKeyHole = false;
     private XRBaseController m_currentController;
@@ -34,6 +56,7 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     protected override void Awake()
     {
         base.Awake();
+        
         m_keyholeStateMachine = new StateMachine();
         // init states
         var keyIsOutState = new KeyholeStateKeyIsOut();
@@ -47,22 +70,30 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
 
         AT(keyIsOutState, keyIsInsertedAndCanMoveState, KeyIsInsertingAlignedWithHole());
         AT(keyIsInsertedAndCanMoveState, keyIsOutState, KeyIsRemoved());
+
         AT(keyIsInsertedAndCanMoveState, keyIsInsertedAndCanMoveRotateIntermediateState, KeyIsInsideEnough());
         AT(keyIsInsertedAndCanMoveRotateIntermediateState, keyIsInsertedAndCanMoveState, KeyIsOutEnough());
+
         AT(keyIsInsertedAndCanMoveRotateIntermediateState, keyIsInsertedAndCanRotateState, KeyIsInsideAndRotatedCWABit());
         AT(keyIsInsertedAndCanRotateState, keyIsInsertedAndCanMoveRotateIntermediateState, KeyIsInsideAndRotatedCCWTillStop());
 
         //conditions
-        Func<bool> KeyIsInsertingAlignedWithHole() => () => 1 == 1;
-        Func<bool> KeyIsRemoved() => () => 1 == 1;
-        Func<bool> KeyIsInsideEnough() => () => 1 == 1;
-        Func<bool> KeyIsOutEnough() => () => 1 == 1;
-        Func<bool> KeyIsInsideAndRotatedCWABit() => () => 1 == 1;
-        Func<bool> KeyIsInsideAndRotatedCCWTillStop() => () => 1 == 1;
+        Func<bool> KeyIsInsertingAlignedWithHole() => () => Key!=null 
+                                                            && Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward) >= m_minDotToBeAlignedForward
+                                                            && Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) < m_eulerAngleToBeAlignedRotation
+                                                            && Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) < m_distanceToRemoveKey;
+        Func<bool> KeyIsRemoved() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position)>= m_distanceToRemoveKey;
+
+        Func<bool> KeyIsInsideEnough() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) <= m_distanceToStartRotating;
+        Func<bool> KeyIsOutEnough() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) > m_distanceToStartRotating;
+
+        Func<bool> KeyIsInsideAndRotatedCWABit() => () => Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) >= m_eulerAngleTillNoRemoveKey;
+        Func<bool> KeyIsInsideAndRotatedCCWTillStop() => () => Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) < m_eulerAngleTillNoRemoveKey;
 
         // setting start state
         m_keyholeStateMachine.SetState(keyIsOutState);
     }
+
 
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
@@ -82,19 +113,22 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     {
         base.OnHoverEntered(args);
 
-        if(CheckKeyAligned())
+        if(Key==null)
         {
-            m_key = args.interactableObject.transform.gameObject;
-            m_keyGrabInteractable = m_key.GetComponent<XRGrabInteractable>();
-            m_keyInKeyHole = true;
-            InsertKeyInKeyHole();
+            Key = args.interactableObject.transform.gameObject;
+            m_keyGrabInteractable = Key.GetComponent<XRGrabInteractable>();
+
         }
 
     }
     protected override void OnHoverExited(HoverExitEventArgs args)
     {
         base.OnHoverExited(args);
-        CancelInteractionWithSocket();
+        if(Key== args.interactableObject.transform.gameObject)
+        {
+            Key = null;
+        }
+        //CancelInteractionWithSocket();
 
     }
     public override void ProcessInteractor(XRInteractionUpdateOrder.UpdatePhase updatePhase)
@@ -103,9 +137,15 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
 
         if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
         {
-            UpdateCurrentController();
-
-            CheckDistanceToHand();
+            //UpdateCurrentController();
+            if (Key != null)
+            {
+                _testDistance = Vector3.Distance(Key.transform.position, AttachedPosition.transform.position);
+                _testDot = Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward);
+                _testAngle = Vector3.Angle(Key.transform.right, AttachedPosition.transform.right);
+                //Debug.Log("dot "+ Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward) + "dist "+Vector3.Distance(Key.transform.position, AttachedPosition.transform.position));
+            }
+            //CheckDistanceToHand();
             m_keyholeStateMachine.Process();
         }
 
@@ -132,15 +172,15 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
         m_keyGrabInteractable.trackPosition = false;
         
         // Debug.Log(m_cardGrabInteractable.trackPosition);
-        m_key.transform.position = m_attachedPosition.position;
-        m_key.transform.rotation = m_attachedPosition.rotation;
+        Key.transform.position = m_attachedPosition.position;
+        Key.transform.rotation = m_attachedPosition.rotation;
 
-        m_key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        Key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
 
     }
     private void CheckDistanceToHand()
     {
-        if (m_currentController != null && Vector3.Distance(m_key.transform.position, m_currentController.transform.position) > m_minDistanceToSocket)
+        if (m_currentController != null && Vector3.Distance(Key.transform.position, m_currentController.transform.position) > m_minDistanceToSocket)
         {
             m_keyGrabInteractable.trackPosition = true;
         }
@@ -152,13 +192,13 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
             m_keyGrabInteractable.trackPosition = true;
 
 
-            m_key = null;
+            Key = null;
             m_keyGrabInteractable = null;
             m_keyInKeyHole = false;
             m_currentController = null;
             
 
-            m_key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            Key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
     }
 
