@@ -120,9 +120,12 @@ MonoBehaviour:
   _testPosition: {fileID: 2964629915699083871}
   _testDistance: 0
   _testDot: 0
-  m_minDotToBeAligned: 0.96
+  _testAngle: 0
+  m_minDotToBeAlignedForward: 0.96
+  m_eulerAngleToBeAlignedRotation: 15
   m_distanceToRemoveKey: 0.07
   m_distanceToStartRotating: 0.01
+  m_eulerAngleTillNoRemoveKey: 15
   m_minDistanceToSocket: 0.1
   m_onMinReached:
     m_PersistentCalls:
@@ -1467,7 +1470,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 534
+  m_VersionIndex: 543
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1660,7 +1663,7 @@ PrefabInstance:
     - target: {fileID: 7207894573529164856, guid: aec827fd50ccb9e43a9c431a0748ee5e,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1378
+      value: 1387
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
