@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
@@ -10,38 +12,35 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
 {
     [Header("KeyHole options")]
     private StateMachine m_keyholeStateMachine;
-    [SerializeField] private Transform m_attachedPosition;
-    public Transform AttachedPosition
-    {
-        get
-        {
-            return m_attachedPosition;
-        }
-        set
-        {
-            m_attachedPosition = AttachedPosition;
-        }
-    }
-    [SerializeField] private Transform _testPosition;
+    private Rigidbody m_keyholeRigidbody;
+    [SerializeField] private Transform m_attachedPositionTransform;
+    [SerializeField] private Collider[] m_keyholeCollidersToNotCollideWithKey;
+
+
     [SerializeField] private float _testDistance;
     [SerializeField] private float _testDot;
     [SerializeField] private float _testAngle;
 
     [SerializeField] private float m_minDotToBeAlignedForward = 0.96f;
     [SerializeField] private float m_eulerAngleToBeAlignedRotation = 15f;
-    [SerializeField] private float m_distanceToRemoveKey = 0.07f;
-    [SerializeField] private float m_distanceToStartRotating = 0.01f;
+    [SerializeField] private float m_distanceToRemoveKey = 0.13f;
+    [SerializeField] private float m_distanceToStartRotating = 0.005f;
     [SerializeField] private float m_eulerAngleTillNoRemoveKey = 15f;
 
 
-    [SerializeField] private float m_minDistanceToSocket = 0.1f;
-    
-
-    public GameObject Key { get; private set; }
+    [SerializeField] private float m_minDistanceToKeyToUnselect = 0.1f;
 
     private XRGrabInteractable m_keyGrabInteractable;
-    private bool m_keyInKeyHole = false;
-    private XRBaseController m_currentController;
+    public Transform KeyTransform { get; private set; }
+    public Rigidbody KeyRigidbody { get; private set; }
+
+    private Collider[] m_keyColliders;
+    private Collider[] m_keyCollidersEmpty = new Collider[] { };
+    //dragparameters
+    [SerializeField] private float m_keyInKeyholeDrag = 1f;
+    [SerializeField] private float m_keyInKeyholeAngularDrag = 1f;
+    private float m_keySavedDrag;
+    private float m_keySavedAngularDrag;
 
     [Header("KeyHole Events")]
     [SerializeField] private UnityEvent m_onMinReached;
@@ -56,13 +55,16 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     protected override void Awake()
     {
         base.Awake();
-        
+
+        m_keyColliders = m_keyCollidersEmpty;
+        m_keyholeRigidbody=GetComponentInChildren<Rigidbody>();
+
         m_keyholeStateMachine = new StateMachine();
         // init states
-        var keyIsOutState = new KeyholeStateKeyIsOut();
-        var keyIsInsertedAndCanMoveState = new KeyholeStateKeyIsInsertedAndCanMove();
-        var keyIsInsertedAndCanMoveRotateIntermediateState = new KeyholeStateKeyIsInsertedAndCanMoveRotate();
-        var keyIsInsertedAndCanRotateState = new KeyholeStateKeyIsInsertedAndCanRotate();
+        var keyIsOutState = new KeyholeStateKeyIsOut(this);
+        var keyIsInsertedAndCanMoveState = new KeyholeStateKeyIsInsertedAndCanMove(this, m_attachedPositionTransform, m_attachedPositionTransform.rotation, m_keyholeRigidbody, m_distanceToRemoveKey);
+        var keyIsInsertedAndCanMoveRotateIntermediateState = new KeyholeStateKeyIsInsertedAndCanMoveRotate(this, m_attachedPositionTransform, m_keyholeRigidbody, m_distanceToStartRotating);
+        var keyIsInsertedAndCanRotateState = new KeyholeStateKeyIsInsertedAndCanRotate(this, m_attachedPositionTransform, m_attachedPositionTransform.position, m_keyholeRigidbody);
 
         //adding transitions
         //local functions for simplicity
@@ -78,17 +80,17 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
         AT(keyIsInsertedAndCanRotateState, keyIsInsertedAndCanMoveRotateIntermediateState, KeyIsInsideAndRotatedCCWTillStop());
 
         //conditions
-        Func<bool> KeyIsInsertingAlignedWithHole() => () => Key!=null 
-                                                            && Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward) >= m_minDotToBeAlignedForward
-                                                            && Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) < m_eulerAngleToBeAlignedRotation
-                                                            && Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) < m_distanceToRemoveKey;
-        Func<bool> KeyIsRemoved() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position)>= m_distanceToRemoveKey;
+        Func<bool> KeyIsInsertingAlignedWithHole() => () => m_keyGrabInteractable != null 
+                                                            && Vector3.Dot(KeyTransform.forward, m_attachedPositionTransform.forward) >= m_minDotToBeAlignedForward
+                                                            && Vector3.Angle(KeyTransform.right, m_attachedPositionTransform.right) < m_eulerAngleToBeAlignedRotation
+                                                            && Vector3.Distance(m_attachedPositionTransform.InverseTransformPoint(KeyTransform.position), Vector3.zero) < m_distanceToRemoveKey;
+        Func<bool> KeyIsRemoved() => () => Vector3.Distance(m_attachedPositionTransform.InverseTransformPoint(KeyTransform.position), Vector3.zero) >= m_distanceToRemoveKey;
 
-        Func<bool> KeyIsInsideEnough() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) <= m_distanceToStartRotating;
-        Func<bool> KeyIsOutEnough() => () => Vector3.Distance(Key.transform.position, AttachedPosition.transform.position) > m_distanceToStartRotating;
+        Func<bool> KeyIsInsideEnough() => () => Vector3.Distance(m_attachedPositionTransform.InverseTransformPoint(KeyTransform.position), Vector3.zero) <= m_distanceToStartRotating;
+        Func<bool> KeyIsOutEnough() => () => Vector3.Distance(m_attachedPositionTransform.InverseTransformPoint(KeyTransform.position), Vector3.zero) > m_distanceToStartRotating;
 
-        Func<bool> KeyIsInsideAndRotatedCWABit() => () => Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) >= m_eulerAngleTillNoRemoveKey;
-        Func<bool> KeyIsInsideAndRotatedCCWTillStop() => () => Vector3.Angle(Key.transform.right, AttachedPosition.transform.right) < m_eulerAngleTillNoRemoveKey;
+        Func<bool> KeyIsInsideAndRotatedCWABit() => () => Vector3.Angle(KeyTransform.right, m_attachedPositionTransform.right) >= m_eulerAngleTillNoRemoveKey;
+        Func<bool> KeyIsInsideAndRotatedCCWTillStop() => () => Vector3.Angle(KeyTransform.right, m_attachedPositionTransform.right) < m_eulerAngleTillNoRemoveKey;
 
         // setting start state
         m_keyholeStateMachine.SetState(keyIsOutState);
@@ -113,94 +115,95 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     {
         base.OnHoverEntered(args);
 
-        if(Key==null)
+        if(m_keyGrabInteractable==null)
         {
-            Key = args.interactableObject.transform.gameObject;
-            m_keyGrabInteractable = Key.GetComponent<XRGrabInteractable>();
-
+            var key = args.interactableObject.transform.gameObject;
+            m_keyGrabInteractable = key.GetComponent<XRGrabInteractable>();
+            m_keyColliders = key.GetComponentsInChildren<Collider>();
+            KeyTransform = key.transform;
+            KeyRigidbody = key.GetComponent<Rigidbody>();
+            SaveKeyDragParameters();
         }
 
     }
     protected override void OnHoverExited(HoverExitEventArgs args)
     {
         base.OnHoverExited(args);
-        if(Key== args.interactableObject.transform.gameObject)
+        if(m_keyGrabInteractable == args.interactableObject.transform.gameObject.GetComponent<XRGrabInteractable>())
         {
-            Key = null;
+            m_keyGrabInteractable = null;
+            m_keyColliders = m_keyCollidersEmpty;
+            KeyTransform = null;
+            KeyRigidbody = null;
         }
-        //CancelInteractionWithSocket();
 
     }
     public override void ProcessInteractor(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
         base.ProcessInteractor(updatePhase);
 
-        if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Dynamic)
+        if (m_keyGrabInteractable != null)
         {
-            //UpdateCurrentController();
-            if (Key != null)
+            if (updatePhase == XRInteractionUpdateOrder.UpdatePhase.Fixed)
             {
-                _testDistance = Vector3.Distance(Key.transform.position, AttachedPosition.transform.position);
-                _testDot = Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward);
-                _testAngle = Vector3.Angle(Key.transform.right, AttachedPosition.transform.right);
-                //Debug.Log("dot "+ Vector3.Dot(Key.transform.forward, AttachedPosition.transform.forward) + "dist "+Vector3.Distance(Key.transform.position, AttachedPosition.transform.position));
-            }
-            //CheckDistanceToHand();
-            m_keyholeStateMachine.Process();
+                CheckIfKeyInHandAndDistanceToHand();
+                m_keyholeStateMachine.Process();
+                _testDistance = Vector3.Distance(m_attachedPositionTransform.InverseTransformPoint(KeyTransform.position), Vector3.zero);
+                _testDot = Vector3.Dot(KeyTransform.forward, m_attachedPositionTransform.forward);
+                _testAngle = Vector3.Angle(KeyTransform.right, m_attachedPositionTransform.right);
+                
+            } 
         }
+    }
 
-    }
-    private bool CheckKeyAligned()
+    private void CheckIfKeyInHandAndDistanceToHand()
     {
-        return true;
-    }
-    private void UpdateCurrentController()
-    {
+
         if (m_keyGrabInteractable.interactorsSelecting.Count > 0)
         {
             var controllerInteractor = m_keyGrabInteractable.interactorsSelecting[0] as XRBaseControllerInteractor;
-            if (controllerInteractor != null) m_currentController = controllerInteractor.xrController;
-        }
-        else
-        {
-            m_currentController = null;
+            if (controllerInteractor != null && Vector3.Distance(KeyTransform.position, controllerInteractor.transform.position) > m_minDistanceToKeyToUnselect)
+            {
+                // unsubscribe hand from key
+                controllerInteractor.allowSelect = false;
+                controllerInteractor.allowSelect = true;
+            }
+
         }
     }
-    private void InsertKeyInKeyHole()
+
+    public void SetCollisionBetweenKeyAndKeyholeActive(bool value)
     {
-
-        m_keyGrabInteractable.trackPosition = false;
-        
-        // Debug.Log(m_cardGrabInteractable.trackPosition);
-        Key.transform.position = m_attachedPosition.position;
-        Key.transform.rotation = m_attachedPosition.rotation;
-
-        Key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-
-    }
-    private void CheckDistanceToHand()
-    {
-        if (m_currentController != null && Vector3.Distance(Key.transform.position, m_currentController.transform.position) > m_minDistanceToSocket)
+        foreach (var keyholeCollider in m_keyholeCollidersToNotCollideWithKey)
         {
-            m_keyGrabInteractable.trackPosition = true;
-        }
-    }
-    private void CancelInteractionWithSocket()
-    {
-        if (m_keyInKeyHole)
-        {
-            m_keyGrabInteractable.trackPosition = true;
-
-
-            Key = null;
-            m_keyGrabInteractable = null;
-            m_keyInKeyHole = false;
-            m_currentController = null;
-            
-
-            Key.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            foreach (var keyCollider in m_keyColliders)
+            {
+                Physics.IgnoreCollision(keyholeCollider, keyCollider, value);
+            }
         }
     }
 
+    private void SaveKeyDragParameters()
+    {
+        m_keySavedDrag = KeyRigidbody.drag;
+        m_keySavedDrag = KeyRigidbody.angularDrag;
+    }
+    public void SetDragParametersKeyInKeyhole(bool value)
+    {
+        if (KeyRigidbody != null)
+        {
+            if (value)
+            {
+                KeyRigidbody.drag = m_keyInKeyholeDrag;
+                KeyRigidbody.angularDrag = m_keyInKeyholeAngularDrag;
+            }
+            else
+            {
+                KeyRigidbody.drag = m_keySavedDrag;
+                KeyRigidbody.angularDrag = m_keySavedAngularDrag;
+
+            }
+        }
+    }
 
 }
