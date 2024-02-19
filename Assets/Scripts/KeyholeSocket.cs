@@ -25,6 +25,7 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
     [SerializeField] private float m_eulerAngleToBeAlignedRotationToLetInsertKey = 15f;
     [SerializeField] private float m_distanceFromInsertedPositionToRemoveKeyFromKeyhole = 0.13f;
     [SerializeField] private float m_distanceFromInsertedPositionToLetStartRotating = 0.005f;
+    [SerializeField] private float m_distanceDeltaPercentForLinearTransitions = 1f;
     [SerializeField] private float m_eulerAngleRotationTillNoRemoveKey = 15f;
 
     [SerializeField] private float m_eulerAngleRotationTillRotationLimit = 90f;
@@ -72,9 +73,9 @@ public class KeyholeSocket : XRSocketInteractor, IHaveMinMax
         Vector3 attachedPositionRight = m_insertedPositionTransform.right;
 
         var keyIsInsertedAndCanMoveState = new KeyholeStateKeyIsInsertedAndCanMove(this, m_insertedPositionTransform, attachedPositionRotation,
-            m_keyholeRigidbody, m_distanceFromInsertedPositionToRemoveKeyFromKeyhole);
+            m_keyholeRigidbody, m_distanceFromInsertedPositionToRemoveKeyFromKeyhole, m_distanceDeltaPercentForLinearTransitions);
         var keyIsInsertedAndCanMoveRotateIntermediateState = new KeyholeStateKeyIsInsertedAndCanMoveRotate(this, attachedPositionRotation, 
-            m_keyholeRigidbody, m_distanceFromInsertedPositionToLetStartRotating, m_eulerAngleRotationTillRotationLimit);
+            m_keyholeRigidbody, m_distanceFromInsertedPositionToLetStartRotating, m_distanceDeltaPercentForLinearTransitions, m_eulerAngleRotationTillRotationLimit);
         m_keyIsInsertedAndCanRotateState = new KeyholeStateKeyIsInsertedAndCanRotate(this, m_insertedPositionTransform.position, attachedPositionRight, 
             attachedPositionRotation, m_keyholeRigidbody, m_eulerAngleRotationTillRotationLimit, m_eulerAngleRotationTillActivation);
 

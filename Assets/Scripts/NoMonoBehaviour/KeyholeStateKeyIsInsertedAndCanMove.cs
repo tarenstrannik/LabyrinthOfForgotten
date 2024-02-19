@@ -11,15 +11,17 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
     private readonly Rigidbody m_keyholeRigidbody;
     private readonly Quaternion m_attachedRotation;
     private readonly float m_zLimit;
+    private readonly float m_zLimitDelta;
     private ConfigurableJoint m_keyJoint;
     public KeyholeStateKeyIsInsertedAndCanMove(KeyholeSocket keyhole, Transform attachedTransform,
-        Quaternion attachedRotation, Rigidbody keyholeRigidbody, float zLimit)
+        Quaternion attachedRotation, Rigidbody keyholeRigidbody, float zLimit, float zLimitDelta)
     {
         m_keyhole = keyhole;
         m_attachedTransform = attachedTransform;
         m_attachedRotation = attachedRotation;
         m_keyholeRigidbody = keyholeRigidbody;
         m_zLimit = zLimit;
+        m_zLimitDelta = zLimitDelta;
     }
     public void Enter()
     {
@@ -41,7 +43,7 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
         m_keyJoint.connectedAnchor =  new Vector3(0, 0, -m_zLimit/2);
 
         var limit = new SoftJointLimit();
-        limit.limit = m_zLimit/2;
+        limit.limit = (m_zLimit/2)*(1+ m_zLimitDelta/100);
         m_keyJoint.linearLimit = limit;
 
         m_keyJoint.angularXMotion = ConfigurableJointMotion.Locked;

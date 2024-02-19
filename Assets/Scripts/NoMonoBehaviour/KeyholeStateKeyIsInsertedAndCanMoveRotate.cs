@@ -9,17 +9,19 @@ public class KeyholeStateKeyIsInsertedAndCanMoveRotate : IState
     private readonly Quaternion m_attachedTransformRotation;
     private readonly Rigidbody m_keyholeRigidbody;
     private readonly float m_zLimit;
+    private readonly float m_zLimitDelta;
     private readonly float m_maxAngularZLimit;
 
     private ConfigurableJoint m_keyJoint;
 
     private Quaternion m_keyRotationOnEnter;
-    public KeyholeStateKeyIsInsertedAndCanMoveRotate(KeyholeSocket keyhole, Quaternion attachedTransformRotation, Rigidbody keyholeRigidbody, float zLimit, float maxAngularZLimit)
+    public KeyholeStateKeyIsInsertedAndCanMoveRotate(KeyholeSocket keyhole, Quaternion attachedTransformRotation, Rigidbody keyholeRigidbody, float zLimit, float zLimitDelta, float maxAngularZLimit)
     {
         m_keyhole = keyhole;
         m_attachedTransformRotation = attachedTransformRotation;
         m_keyholeRigidbody = keyholeRigidbody;
         m_zLimit = zLimit;
+        m_zLimitDelta = zLimitDelta;
         m_maxAngularZLimit = maxAngularZLimit;
 
     }
@@ -33,7 +35,7 @@ public class KeyholeStateKeyIsInsertedAndCanMoveRotate : IState
         m_keyJoint.autoConfigureConnectedAnchor = false;
         m_keyJoint.connectedAnchor = new Vector3(0, 0, -m_zLimit/2);
         var limit = new SoftJointLimit();
-        limit.limit = m_zLimit/2;
+        limit.limit = (m_zLimit / 2) * (1 + m_zLimitDelta / 100);
         m_keyJoint.linearLimit = limit;
 
         limit.limit = 0;
