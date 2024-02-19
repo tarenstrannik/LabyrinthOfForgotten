@@ -14,9 +14,8 @@ public class KeyholeStateKeyIsOut : IState
     }
     public void Enter()
     {
-        Debug.Log("enter first state");
-        m_keyhole.SetCollisionBetweenKeyAndKeyholeActive(false);
-        m_keyhole.SetDragParametersKeyInKeyhole(false);
+        m_keyhole.SetKeyInKeyhole(false);
+
 
     }
     public void Process()
@@ -25,6 +24,6 @@ public class KeyholeStateKeyIsOut : IState
     }
     public void Exit()
     {
-        Debug.Log("exit first state");
+
     }
 }

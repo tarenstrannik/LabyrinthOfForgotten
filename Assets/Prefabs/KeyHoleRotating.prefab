@@ -54,8 +54,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.21
-  m_Center: {x: 0, y: 0, z: 0.14}
+  m_Radius: 0.05
+  m_Center: {x: 0.0000054085695, y: -0.01, z: 0.073}
 --- !u!114 &5247864793028284603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,18 +116,17 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
-  m_attachedPositionTransform: {fileID: 4335269204534743319}
-  m_keyholeCollidersToNotCollideWithKey:
+  m_insertedPositionTransform: {fileID: 4335269204534743319}
+  m_keyholeCollidersToNotCollideWithKeyWhenBeginInserting:
   - {fileID: 2598242415154744744}
-  _testDistance: 0
-  _testDot: 0
-  _testAngle: 0
-  m_minDotToBeAlignedForward: 0.96
-  m_eulerAngleToBeAlignedRotation: 15
-  m_distanceToRemoveKey: 0.07
-  m_distanceToStartRotating: 0.01
-  m_eulerAngleTillNoRemoveKey: 15
-  m_minDistanceToKeyToUnselect: 0.1
+  m_minDotToBeAlignedForwardToLetInsertKey: 0.96
+  m_eulerAngleToBeAlignedRotationToLetInsertKey: 15
+  m_distanceFromInsertedPositionToRemoveKeyFromKeyhole: 0.13
+  m_distanceFromInsertedPositionToLetStartRotating: 0.005
+  m_eulerAngleRotationTillNoRemoveKey: 15
+  m_eulerAngleRotationTillRotationLimit: 90
+  m_eulerAngleRotationTillActivation: 85
+  m_minDistanceFromHandToKeyToUnselect: 0.15
   m_keyInKeyholeDrag: 1
   m_keyInKeyholeAngularDrag: 1
   m_onMinReached:
@@ -138,7 +137,55 @@ MonoBehaviour:
       m_Calls: []
   m_onMaxReached:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorUnlocking, Assembly-CSharp
+        m_MethodName: UnlockAndOpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DoorUnlocking, Assembly-CSharp
+        m_MethodName: UnlockAndOpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5247864793028284603}
+        m_TargetAssemblyTypeName: KeyholeSocket, Assembly-CSharp
+        m_MethodName: ClearEventsSubscription
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_onMaxLeft:
     m_PersistentCalls:
       m_Calls: []
@@ -151,8 +198,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4335269204534743319}
+  - component: {fileID: 1468806547160404392}
   m_Layer: 7
-  m_Name: Attach
+  m_Name: InsertedTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,6 +221,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3192220313045347738}
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
+--- !u!54 &1468806547160404392
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866943727557934883}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 2
 --- !u!1 &8128183207945413709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,7 +1515,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 564
+  m_VersionIndex: 597
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1546,7 +1621,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!114 &824754414845906053

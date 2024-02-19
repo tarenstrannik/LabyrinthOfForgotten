@@ -23,10 +23,8 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
     }
     public void Enter()
     {
-        Debug.Log("Enter second state");
-        m_keyhole.SetCollisionBetweenKeyAndKeyholeActive(true);
-        m_keyhole.SetDragParametersKeyInKeyhole(true);
-
+        m_keyhole.SetKeyInKeyhole(true);
+        
         //joint solution
         m_keyhole.KeyTransform.rotation = m_attachedRotation;
         
@@ -41,7 +39,7 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
 
         
         m_keyJoint.connectedAnchor =  new Vector3(0, 0, -m_zLimit/2);
-        Debug.Log(" " + m_keyJoint.connectedAnchor);
+
         var limit = new SoftJointLimit();
         limit.limit = m_zLimit/2;
         m_keyJoint.linearLimit = limit;
@@ -58,26 +56,10 @@ public class KeyholeStateKeyIsInsertedAndCanMove : IState
     }
     public void Process()
     {
-        /*
-        m_keyhole.KeyTransform.rotation = m_attachedRotation;
-        m_keyhole.KeyRigidbody.angularVelocity = Vector3.zero;
 
-        Vector3 localVelocity = m_keyhole.KeyTransform.InverseTransformDirection(m_keyhole.KeyRigidbody.velocity);
-        localVelocity.x = 0;
-        localVelocity.y = 0;
-
-        m_keyhole.KeyRigidbody.velocity = m_keyhole.KeyTransform.TransformDirection(localVelocity);
-
-        
-        var relativeStartPosition = m_attachedTransform.InverseTransformPoint(m_keyhole.KeyTransform.position);
-        var updatedrelativePosition = new Vector3(0, 0, relativeStartPosition.z);
-        var globalPosition = m_attachedTransform.TransformPoint(updatedrelativePosition);
-        m_keyhole.KeyTransform.transform.position = globalPosition;
-        */
     }
     public void Exit()
     {
-        Debug.Log("Exit second state");
         Object.Destroy(m_keyJoint);
     }
 

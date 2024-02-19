@@ -6,24 +6,27 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class KeyholeStateKeyIsInsertedAndCanMoveRotate : IState
 {
     private readonly KeyholeSocket m_keyhole;
-    private readonly Transform m_attachedTransform;
+    private readonly Quaternion m_attachedTransformRotation;
     private readonly Rigidbody m_keyholeRigidbody;
     private readonly float m_zLimit;
+    private readonly float m_maxAngularZLimit;
 
     private ConfigurableJoint m_keyJoint;
-    public KeyholeStateKeyIsInsertedAndCanMoveRotate(KeyholeSocket keyhole, Transform attachTransform, Rigidbody keyholeRigidbody, float zLimit)
+
+    private Quaternion m_keyRotationOnEnter;
+    public KeyholeStateKeyIsInsertedAndCanMoveRotate(KeyholeSocket keyhole, Quaternion attachedTransformRotation, Rigidbody keyholeRigidbody, float zLimit, float maxAngularZLimit)
     {
         m_keyhole = keyhole;
-        m_attachedTransform = attachTransform;
+        m_attachedTransformRotation = attachedTransformRotation;
         m_keyholeRigidbody = keyholeRigidbody;
         m_zLimit = zLimit;
+        m_maxAngularZLimit = maxAngularZLimit;
+
     }
     public void Enter()
     {
-        Debug.Log("Enter third state");
-        m_keyhole.KeyTransform.position = m_attachedTransform.position;
-        m_keyhole.KeyTransform.rotation = m_attachedTransform.rotation;
-
+        m_keyRotationOnEnter = m_keyhole.KeyTransform.rotation;
+        m_keyhole.KeyTransform.rotation = m_attachedTransformRotation;
 
         m_keyJoint = m_keyhole.KeyTransform.gameObject.AddComponent<ConfigurableJoint>();
         m_keyJoint.connectedBody = m_keyholeRigidbody;
@@ -33,7 +36,12 @@ public class KeyholeStateKeyIsInsertedAndCanMoveRotate : IState
         limit.limit = m_zLimit/2;
         m_keyJoint.linearLimit = limit;
 
-        m_keyJoint.angularXMotion = ConfigurableJointMotion.Locked;
+        limit.limit = 0;
+        m_keyJoint.lowAngularXLimit = limit;
+        limit.limit = m_maxAngularZLimit;
+        m_keyJoint.highAngularXLimit = limit;
+
+        m_keyJoint.angularXMotion = ConfigurableJointMotion.Limited;
         m_keyJoint.angularYMotion = ConfigurableJointMotion.Locked;
         m_keyJoint.angularZMotion = ConfigurableJointMotion.Locked;
         m_keyJoint.xMotion = ConfigurableJointMotion.Limited;
@@ -41,23 +49,11 @@ public class KeyholeStateKeyIsInsertedAndCanMoveRotate : IState
         m_keyJoint.zMotion = ConfigurableJointMotion.Locked;
         
         m_keyJoint.axis = Vector3.forward;
+
+        m_keyhole.KeyTransform.rotation = m_keyRotationOnEnter;
     }
     public void Process()
     {
-        /*
-        Vector3 localVelocity = m_keyhole.KeyTransform.InverseTransformDirection(m_keyhole.KeyRigidbody.velocity);
-        localVelocity.x = 0;
-        localVelocity.y = 0;
-
-        m_keyhole.KeyRigidbody.velocity = m_keyhole.KeyTransform.TransformDirection(localVelocity);
-
-
-        var relativeStartPosition = m_attachedTransform.InverseTransformPoint(m_keyhole.KeyTransform.position);
-        var newRelativeZ = relativeStartPosition.z <= 0 ? relativeStartPosition.z : 0;
-        var updatedrelativePosition = new Vector3(0, 0, newRelativeZ);
-        var globalPosition = m_attachedTransform.TransformPoint(updatedrelativePosition);
-        m_keyhole.KeyTransform.transform.position = globalPosition;
-        */
     }
     public void Exit()
     {
